@@ -25,4 +25,5 @@ urlpatterns = [
     path('userlist/', views.userlist_page, name='userlist'),
     path('report/', views.report_page, name='report'),
     path('movieview/', views.movieview_page, name='movieview'),
+    path('chagepassword/', views.change_password, name='changepassword'),
 ]

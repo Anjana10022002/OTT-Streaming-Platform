@@ -12,3 +12,5 @@ def report_page(request):
     return render(request, './report.html')
 def movieview_page(request):
     return render(request, './movieview.html')
+def change_password(request):
+    return render(request, './changepassword.html')
