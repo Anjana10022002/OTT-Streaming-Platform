@@ -26,4 +26,5 @@ urlpatterns = [
     path('report/', views.report_page, name='report'),
     path('movieview/', views.movieview_page, name='movieview'),
     path('chagepassword/', views.change_password, name='changepassword'),
+    path('logout/', views.logout_view, name='logout'),
 ]

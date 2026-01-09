@@ -14,3 +14,5 @@ def movieview_page(request):
     return render(request, './movieview.html')
 def change_password(request):
     return render(request, './changepassword.html')
+def logout_view(request):
+    return render(request, './logout.html')
