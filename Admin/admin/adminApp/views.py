@@ -13,6 +13,8 @@ def report_page(request):
 def movieview_page(request):
     return render(request, './movieview.html')
 def change_password(request):
-    return render(request, './changepassword.html')
+    return render(request, './passwordchange.html')
 def logout_view(request):
     return render(request, './logout.html')
+def add_movie(request):
+    return render(request, './addmovie.html')

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    {% include 'partials/navbar1.html' %}
+
+    <h2>Add New Movie</h2>
+
+    <form method="post" enctype="multipart/form-data" class="movie-form">
+        {% csrf_token %}
+
+        <label for="title">Movie Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter movie title" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Enter movie description" required></textarea>
+
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+
+        <label for="video">Movie File</label>
+        <input type="file" id="video" name="video" accept="video/*" required>
+
+        <div class="form-actions">
+            <button type="submit">Add Movie</button>
+            <a href="{% url 'movielist' %}" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+
+</body>
+</html>
