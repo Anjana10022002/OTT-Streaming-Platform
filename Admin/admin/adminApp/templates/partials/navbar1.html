@@ -1,6 +1,7 @@
 {% load static %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <nav class="ott-navbar">
     <div class="nav-left">
@@ -11,15 +12,17 @@
         <a href="{% url 'report' %}">Reports</a>
     </div>
 
-    <div class="nav-right dropdown">
-        <button class="profile-btn dropdown-toggle" data-toggle="dropdown">
-            <i class="fa-solid fa-user"></i>
-            Admin
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger">Logout</a>
+    <div class="nav-right">
+    <details class="admin-menu">
+        <summary>
+            <i class="fa-solid fa-user"></i> Admin
+        </summary>
+        <div class="menu-box">
+            <a href="{% url 'changepassword' %}">Change Password</a>
+            <button> Logout</button>
+            
         </div>
-    </div>
+    </details>
+</div>
+
 </nav>

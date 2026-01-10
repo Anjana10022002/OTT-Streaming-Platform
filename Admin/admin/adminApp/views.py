@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 def login_page(request):
     return render(request, './login.html')
@@ -15,6 +16,6 @@ def movieview_page(request):
 def change_password(request):
     return render(request, './passwordchange.html')
 def logout_view(request):
-    return render(request, './logout.html')
+    redirect('login')
 def add_movie(request):
     return render(request, './addmovie.html')
