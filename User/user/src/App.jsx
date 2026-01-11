@@ -5,7 +5,6 @@ import Router from "./router";
 export default function App() {
     return (
         <BrowserRouter>
-            <Navbar />
             <Router />
         </BrowserRouter>
     );

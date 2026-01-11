@@ -13,10 +13,11 @@ function Router() {
     return (
         <Routes>
             <Route path="/" element={<Register />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/movie/:id" element={<MovieDetails />} />
-            <Route path="/watch/:id" element={<WatchMovie />} />
+            <Route path="/moviedetails" element={<MovieDetails />} />
+            <Route path="/watch" element={<WatchMovie />} />
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/history" element={<History />} />
             <Route path="/change-password" element={<ChangePassword />} />

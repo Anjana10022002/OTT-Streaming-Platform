@@ -10,7 +10,7 @@ function Navbar() {
                     <Link to="/">Home</Link>
                     <Link to="/watchlist">Watchlist</Link>
                     <Link to="/history">History</Link>
-                    <Link to="/login">Login</Link>
+                    <Link to="/logout">Logout</Link>
                 </div>
             </div>
         </nav>
