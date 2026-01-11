@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    {% include 'partials/navbar1.html' %}
+    {% include 'partials/navbar.html' %}
     <p>Movie List Page </p>
     <table border="1">
         <thead>
@@ -24,6 +24,6 @@
 
             </tr>
     </table>
-    <button>Add Movie</button>  
+    <button><a href="{% url 'addmovie' %}" class="primary-btn" style="color: white; text-decoration: none;" >Add Movie</a> </button>
 </body>
 </html>
