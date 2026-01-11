@@ -44,29 +44,50 @@ body {
     color: #2563eb;
 }
 
-.admin-menu summary {
+.nav-right {
+    position: relative;
+}
+
+/* ADMIN DROPDOWN */
+
+.admin-menu {
+    position: relative;
+}
+
+.admin-btn {
     cursor: pointer;
     font-size: 14px;
     color: #374151;
     list-style: none;
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
 }
 
-.admin-menu summary::-webkit-details-marker {
+.admin-btn::-webkit-details-marker {
     display: none;
 }
 
 .menu-box {
     position: absolute;
-    right: 24px;
-    background: #ffffff;
+    top: 36px;
+    right: 0;
+    background-color: #ffffff;
     border: 1px solid #e5e7eb;
-    margin-top: 8px;
-    min-width: 160px;
+    min-width: 180px;
+    z-index: 9999;
+}
+
+.admin-menu .menu-box {
+    display: none;
+}
+
+.admin-menu[open] .menu-box {
+    display: block;
 }
 
 .menu-box a,
 .menu-box button {
-    display: block;
     width: 100%;
     padding: 10px 14px;
     background: none;
@@ -76,9 +97,24 @@ body {
     cursor: pointer;
 }
 
-.menu-box a:hover,
-.menu-box button:hover {
+.menu-box a {
+    color: #374151;
+    text-decoration: none;
+}
+
+.menu-box a:hover {
     background-color: #f3f4f6;
+}
+
+/* LOGOUT BUTTON */
+
+.logoutbtn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.logoutbtn:hover {
+    background-color: #dc2626;
 }
 
 /* TABLE */
@@ -132,18 +168,17 @@ input:focus, textarea:focus {
     border-color: #2563eb;
 }
 
-/* BUTTONS */
+/* BUTTONS (EXCEPT LOGOUT) */
 
-button, .primary-btn {
+button {
     background-color: #2563eb;
     color: white;
     border: none;
     padding: 8px 16px;
-    text-decoration: none;
     cursor: pointer;
 }
 
-button:hover, .primary-btn:hover {
+button:hover {
     background-color: #1e40af;
 }
 
@@ -154,4 +189,58 @@ button:hover, .primary-btn:hover {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+
+.nav-right {
+    position: relative;
+}
+
+.admin-btn {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 36px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    min-width: 180px;
+    display: none;
+    z-index: 9999;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+    width: 100%;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #374151;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+    background-color: #f3f4f6;
+}
+
+.logoutbtn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.logoutbtn:hover {
+    background-color: #dc2626;
 }
