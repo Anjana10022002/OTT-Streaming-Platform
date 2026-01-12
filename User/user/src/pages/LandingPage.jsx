@@ -10,8 +10,8 @@ function Landing() {
                 <p>Watch anywhere. Cancel anytime.</p>
 
                 <div className="landing-actions">
-                    <Link to="/register" className="btn primary">Get Started</Link>
-                    <Link to="/login" className="btn secondary">Sign In</Link>
+                    <Link to="/register" className="btn primary">Sign Up</Link>
+                    <Link to="/login" className="btn secondary">Login</Link>
                 </div>
             </div>
         </div>

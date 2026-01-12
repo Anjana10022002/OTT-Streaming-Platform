@@ -1,5 +1,5 @@
 :root {
-    --bg-main: #0f172a;
+    --bg-main: #0b0f1a;
     --bg-surface: #111827;
     --bg-card: #1f2937;
     --text-main: #f9fafb;
@@ -7,8 +7,6 @@
     --primary: #e50914;
     --border-soft: rgba(255,255,255,0.08);
 }
-
-/* ---------- RESET ---------- */
 
 * {
     margin: 0;
@@ -22,8 +20,6 @@ body {
     color: var(--text-main);
 }
 
-/* ---------- GLOBAL ---------- */
-
 a {
     text-decoration: none;
     color: inherit;
@@ -36,12 +32,13 @@ a {
 }
 
 button {
+    height: 46px;
+    padding: 0 22px;
+    font-size: 14px;
+    font-weight: 600;
     background-color: var(--primary);
     color: white;
     border: none;
-    height: 44px;
-    padding: 0 18px;
-    font-size: 14px;
     cursor: pointer;
 }
 
@@ -50,9 +47,10 @@ button:hover {
 }
 
 input {
-    height: 44px;
+    width: 100%;
+    height: 46px;
     padding: 0 14px;
-    background-color: var(--bg-card);
+    background-color: #0b1220;
     border: 1px solid var(--border-soft);
     color: var(--text-main);
     font-size: 14px;
@@ -62,8 +60,6 @@ input:focus {
     outline: none;
     border-color: var(--primary);
 }
-
-/* ---------- NAVBAR ---------- */
 
 .navbar {
     background-color: var(--bg-surface);
@@ -91,7 +87,6 @@ input:focus {
 
 .nav-links {
     display: flex;
-    align-items: center;
     gap: 28px;
 }
 
@@ -104,72 +99,91 @@ input:focus {
     color: var(--text-main);
 }
 
-/* ---------- PROFILE DROPDOWN ---------- */
-
-.profile-wrapper {
-    position: relative;
+.landing-page {
+    min-height: 100vh;
+    background: linear-gradient(
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("../assets/landing-banner.jpg") center / cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.profile-btn {
-    background: none;
-    border: none;
-    height: auto;
-    padding: 0;
-    font-size: 14px;
+.landing-center {
+    text-align: center;
+    max-width: 620px;
+    padding: 24px;
+}
+
+.landing-center h1 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.landing-center p {
+    font-size: 18px;
     color: var(--text-muted);
-    cursor: pointer;
+    margin-bottom: 30px;
 }
 
-.profile-btn:hover {
-    color: var(--text-main);
+.landing-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
 }
 
-.profile-dropdown {
-    position: absolute;
-    right: 0;
-    top: 40px;
-    background-color: var(--bg-surface);
+.btn.secondary {
+    background-color: transparent;
     border: 1px solid var(--border-soft);
-    min-width: 180px;
-    z-index: 1000;
 }
 
-.profile-dropdown a,
-.profile-dropdown button {
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background: linear-gradient(180deg, #0f172a, #0b1220);
+    padding: 42px;
     width: 100%;
-    height: auto;
-    padding: 10px 14px;
-    background: none;
-    border: none;
-    text-align: left;
-    font-size: 14px;
-    color: var(--text-main);
-    cursor: pointer;
+    max-width: 420px;
+    border: 1px solid var(--border-soft);
+    text-align: center;
 }
 
-.profile-dropdown a:hover,
-.profile-dropdown button:hover {
-    background-color: var(--bg-card);
+.auth-card h2 {
+    font-size: 24px;
+    margin-bottom: 26px;
 }
 
-.logout-btn {
-    color: #ef4444;
+.auth-card input {
+    margin-bottom: 18px;
 }
 
-/* ---------- HOME HEADER ---------- */
+.auth-card button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.auth-card p {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
 
 .home-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
-
-/* ---------- SEARCH ---------- */
 
 .search-box {
     display: flex;
-    align-items: center;
     gap: 10px;
 }
 
@@ -177,76 +191,22 @@ input:focus {
     width: 260px;
 }
 
-.search-box button {
-    font-weight: 600;
-}
-
-/* ---------- MOVIE GRID ---------- */
-
-/* ---------- MOVIE GRID ---------- */
-
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
+    gap: 22px;
 }
 
-/* ---------- MOVIE CARD (PREMIUM OTT STYLE) ---------- */
-
 .movie-card {
-    background-color: transparent;
-    border: none;
-    border-radius: 6px;
+    display: block;
     overflow: hidden;
-    position: relative;
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .movie-card:hover {
-    transform: translateY(-6px) scale(1.04);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-}
-
-/* Image */
-.movie-card img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
-}
-
-/* Content */
-.movie-card-content {
-    padding: 10px 6px 0;
-}
-
-.movie-card h4 {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.movie-card p {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-
-/* .movie-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 18px;
-}
-
-.movie-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-soft);
-    transition: transform 0.2s ease;
-}
-
-.movie-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.6);
 }
 
 .movie-card img {
@@ -254,55 +214,25 @@ input:focus {
     height: 260px;
     object-fit: cover;
 }
-
-.movie-card-content {
-    padding: 12px;
-}
-
-.movie-card h4 {
-    font-size: 14px;
-    margin-bottom: 6px;
-}
-
-.movie-card p {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-} */
-
-/* ---------- MOVIE DETAILS ---------- */
 
 .movie-details-page {
     display: grid;
     grid-template-columns: 320px 1fr;
-    gap: 32px;
-}
-
-.movie-details-page img {
-    width: 100%;
+    gap: 34px;
 }
 
 .movie-meta {
-    display: flex;
-    gap: 10px;
     font-size: 13px;
     color: var(--text-muted);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .movie-description {
     max-width: 720px;
     line-height: 1.6;
     color: var(--text-muted);
-    margin-bottom: 24px;
+    margin-bottom: 26px;
 }
-
-.movie-actions {
-    display: flex;
-    gap: 14px;
-}
-
-/* ---------- WATCH PAGE ---------- */
 
 .video-player {
     width: 100%;
@@ -311,21 +241,8 @@ input:focus {
     margin-top: 16px;
 }
 
-/* ---------- WATCHLIST / HISTORY ---------- */
-
-.page-header {
-    margin-bottom: 20px;
-}
-
-.page-subtitle {
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-/* ---------- HISTORY TABLE ---------- */
-
 .history-table {
-    margin-top: 20px;
+    margin-top: 24px;
     border: 1px solid var(--border-soft);
 }
 
@@ -333,16 +250,15 @@ input:focus {
     display: grid;
     grid-template-columns: 120px 1fr 220px;
     align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border-soft);
+    padding: 14px 18px;
     background-color: var(--bg-card);
 }
 
 .history-row.header {
     background-color: var(--bg-surface);
-    font-size: 13px;
-    color: var(--text-muted);
+    font-size: 12px;
     text-transform: uppercase;
+    color: var(--text-muted);
 }
 
 .history-row img {
@@ -350,33 +266,6 @@ input:focus {
     height: 60px;
     object-fit: cover;
 }
-
-.history-row span {
-    font-size: 14px;
-}
-
-.history-row:not(.header):hover {
-    background-color: rgba(255,255,255,0.05);
-}
-
-/* ---------- BACK BUTTON ---------- */
-
-.back-btn {
-    background: none;
-    border: none;
-    height: auto;
-    padding: 0;
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 16px;
-    cursor: pointer;
-}
-
-.back-btn:hover {
-    color: var(--text-main);
-}
-
-/* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 1200px) {
     .movie-grid {
@@ -396,194 +285,10 @@ input:focus {
     .nav-links {
         display: none;
     }
-
-    .history-row {
-        grid-template-columns: 80px 1fr;
-        row-gap: 6px;
-    }
-
-    .history-row span:last-child {
-        font-size: 12px;
-        color: var(--text-muted);
-    }
 }
 
 @media (max-width: 480px) {
     .movie-grid {
         grid-template-columns: 1fr;
     }
-}
-
-/* ---------- HOME SECTIONS ---------- */
-
-.home-section {
-    margin-top: 36px;
-}
-
-.section-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 14px;
-}
-
-.home-section .movie-grid {
-    row-gap: 22px;
-}
-
-
-.landing-page {
-    min-height: 100vh;
-    background: linear-gradient(
-        rgba(0,0,0,0.65),
-        rgba(0,0,0,0.65)
-    ),
-    url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4");
-    background-size: cover;
-    background-position: center;
-}
-
-.landing-content {
-    max-width: 1300px;
-    margin: auto;
-    padding: 40px 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-}
-
-.landing-text h1 {
-    font-size: 44px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-.landing-text p {
-    font-size: 18px;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    max-width: 520px;
-}
-
-.landing-actions {
-    display: flex;
-    gap: 16px;
-}
-
-.landing-image img {
-    width: 100%;
-    max-width: 520px;
-    border-radius: 6px;
-}
-
-/* Buttons */
-.btn.primary {
-    background-color: var(--primary);
-}
-
-.btn.secondary {
-    background-color: transparent;
-    border: 1px solid var(--border-soft);
-    color: var(--text-main);
-}
-
-.btn.secondary:hover {
-    background-color: rgba(255,255,255,0.08);
-}
-
-/* Responsive */
-
-
-@media (max-width: 900px) {
-    .landing-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .landing-actions {
-        justify-content: center;
-    }
-
-    .landing-image img {
-        margin: auto;
-    }
-}
-
-
-.landing-page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-main);
-}
-
-.landing-center {
-    text-align: center;
-    max-width: 600px;
-    padding: 24px;
-}
-
-.landing-center img {
-    width: 100%;
-    max-width: 480px;
-    margin-bottom: 28px;
-}
-
-.landing-center h1 {
-    font-size: 40px;
-    margin-bottom: 14px;
-}
-
-.landing-center p {
-    font-size: 18px;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-}
-
-.landing-actions {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-}
-
-
-.auth-page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.auth-card {
-    background-color: var(--bg-surface);
-    padding: 36px;
-    width: 100%;
-    max-width: 420px;
-    text-align: center;
-}
-
-.auth-card h2 {
-    margin-bottom: 24px;
-}
-
-.auth-card input {
-    margin-bottom: 16px;
-}
-
-.movie-card {
-    display: block;
-    overflow: hidden;
-    transition: transform 0.25s ease;
-}
-
-.movie-card:hover {
-    transform: scale(1.06);
-}
-
-.movie-card img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
 }
