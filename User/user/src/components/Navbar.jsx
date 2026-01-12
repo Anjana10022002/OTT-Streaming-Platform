@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+    const [open, setOpen] = useState(false);
+
     return (
-        <nav style={{ background: "#fff", borderBottom: "1px solid #e5e7eb" }}>
-            <div className="container" style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="navbar">
+            <div className="navbar-inner">
                 <h3>OTT Platform</h3>
-                <div style={{ display: "flex", gap: "20px" }}>
-                    <Link to="/">Home</Link>
+
+                <div className="nav-links">
+                    <Link to="/home">Home</Link>
                     <Link to="/watchlist">Watchlist</Link>
                     <Link to="/history">History</Link>
-                    <Link to="/logout">Logout</Link>
+
+                    <div className="profile-wrapper">
+                        <button
+                            className="profile-btn"
+                            onClick={() => setOpen(!open)}
+                        >
+                            Profile ▾
+                        </button>
+
+                        {open && (
+                            <div className="profile-dropdown">
+                                <Link to="/change-password">Change Password</Link>
+                                <button className="logout-btn">Logout</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
     );
 }
+
 export default Navbar;

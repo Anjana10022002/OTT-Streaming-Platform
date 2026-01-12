@@ -3,16 +3,31 @@ import Navbar from "../components/Navbar";
 
 function Home() {
     return (
-        <div className="container">
-             <Navbar />
-            <h2>Browse Movies</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px" }}>
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
+        <>
+            <Navbar />
+
+            <div className="container">
+                <div className="home-header">
+                    <h2></h2>
+
+                    <div className="search-box">
+                        <input
+                            type="text"
+                            placeholder="Search movies..."
+                        />
+                        <button>Search</button>
+                    </div>
+                </div>
+
+                <div className="movie-grid">
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                    <MovieCard />
+                </div>
             </div>
-        </div>
+        </>
     );
 }
+
 export default Home;
