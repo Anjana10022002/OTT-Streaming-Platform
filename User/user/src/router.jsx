@@ -21,6 +21,8 @@ function Router() {
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/history" element={<History />} />
             <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/watch/:id" element={<WatchMovie />} />
         </Routes>
     );
 }
