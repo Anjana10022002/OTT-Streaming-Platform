@@ -1,12 +1,18 @@
+
+
 function Login() {
     return (
-        <div className="container" style={{ maxWidth: "400px" }}>
-            <h2>Login</h2>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button className="btn">Login</button>
-            <p>Don't have an account? <a href="/register">Register</a>  </p>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h2>Sign In</h2>
+
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+
+                <button className="btn primary">Login</button>
+            </div>
         </div>
     );
 }
+
 export default Login;

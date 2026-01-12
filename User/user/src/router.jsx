@@ -8,11 +8,12 @@ import WatchMovie from "./pages/WatchMovie";
 import Watchlist from "./pages/Watchlist";
 import History from "./pages/History";
 import ChangePassword from "./pages/ChangePassword";
+import Landing from "./pages/LandingPage";
 
 function Router() {
     return (
         <Routes>
-            <Route path="/" element={<Register />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />

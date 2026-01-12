@@ -7,7 +7,6 @@ function Home() {
             <Navbar />
 
             <div className="container">
-                {/* Search */}
                 <div className="home-header">
                     <h2>Browse Movies</h2>
 
@@ -30,7 +29,7 @@ function Home() {
     
                     </div>
                 </section>
-                
+
                 <section className="home-section">
                     <h3 className="section-title">New Releases</h3>
                     <div className="movie-grid">
