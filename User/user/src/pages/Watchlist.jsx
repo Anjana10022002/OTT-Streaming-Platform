@@ -17,7 +17,6 @@ function Watchlist() {
                     <MovieCard />
                     <MovieCard />
                     <MovieCard />
-
                 </div>
             </div>
         </>
