@@ -79,7 +79,6 @@ input:focus {
     align-items: center;
 }
 
-/* Logo */
 .navbar h3 {
     font-size: 20px;
     font-weight: 700;
@@ -87,7 +86,6 @@ input:focus {
     letter-spacing: 0.4px;
 }
 
-/* Nav links */
 .nav-links {
     display: flex;
     align-items: center;
@@ -106,7 +104,6 @@ input:focus {
     color: var(--text-main);
 }
 
-/* Active underline */
 .nav-links a.active::after,
 .nav-links a:hover::after {
     content: "";
@@ -118,7 +115,6 @@ input:focus {
     background-color: var(--primary);
 }
 
-/* Profile */
 .profile-wrapper {
     position: relative;
 }
@@ -145,7 +141,6 @@ input:focus {
     background-color: rgba(255,255,255,0.12);
 }
 
-/* Dropdown */
 .profile-dropdown {
     position: absolute;
     right: 0;
@@ -169,7 +164,6 @@ input:focus {
     background-color: var(--bg-card);
 }
 
-/* Logout – controlled emphasis */
 .profile-dropdown button {
     width: 100%;
     padding: 12px 16px;
@@ -405,4 +399,3 @@ input:focus {
         grid-template-columns: 1fr;
     }
 }
-/

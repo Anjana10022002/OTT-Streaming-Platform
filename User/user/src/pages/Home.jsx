@@ -17,10 +17,10 @@ function Home() {
                         />
                         <button>Search</button>
                     </div>
-                </div>
+                </div><br></br>
 
-                <section className="home-section">
-                    <h3 className="section-title">Trending Now</h3>
+                <section className="home-section "> 
+                    <h3 className="section-title">Trending Now</h3><br></br>
                     <div className="movie-grid">
                         <MovieCard />
                         <MovieCard />
@@ -28,20 +28,20 @@ function Home() {
                         <MovieCard />
     
                     </div>
-                </section>
+                </section><br></br>
 
                 <section className="home-section">
-                    <h3 className="section-title">New Releases</h3>
+                    <h3 className="section-title">New Releases</h3><br></br>
                     <div className="movie-grid">
                         <MovieCard />
                         <MovieCard />
                         <MovieCard />
                         <MovieCard />
                     </div>
-                </section>
+                </section><br></br>
 
                 <section className="home-section">
-                    <h3 className="section-title">Recommended For You</h3>
+                    <h3 className="section-title">Recommended For You</h3><br></br>
                     <div className="movie-grid">
                         <MovieCard />
                         <MovieCard />

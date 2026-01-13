@@ -9,7 +9,7 @@ function Watchlist() {
                 <div className="page-header">
                     <h2>Your Watchlist</h2>
                     <p className="page-subtitle">
-                        Movies and shows you’ve saved to watch later
+                        Movies and shows you've saved to watch later
                     </p>
                 </div><br></br>
                 <div className="movie-grid">
