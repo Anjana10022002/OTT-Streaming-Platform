@@ -4,7 +4,7 @@ function Landing() {
     return (
         <div className="landing-page">
             <div className="landing-center">
-                <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4" alt="OTT Preview" />
+                {/* <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4" alt="OTT Preview" /> */}
 
                 <h1>Unlimited Movies, Shows & Entertainment</h1>
                 <p>Watch anywhere. Cancel anytime.</p>
