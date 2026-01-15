@@ -201,8 +201,6 @@ input:focus {
     height: 42px;
 }
 
-}
-
 .landing-center h1 {
     font-size: 38px;
     margin-bottom: 12px;
@@ -554,4 +552,4 @@ input:focus {
     .search-box {
         width: 100%;
     }
-}
+} 
