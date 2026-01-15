@@ -1,11 +1,18 @@
 function ChangePassword() {
     return (
-        <div className="container" style={{ maxWidth: "400px" }}>
-            <h2>Change Password</h2>
-            <input type="password" placeholder="Old Password" />
-            <input type="password" placeholder="New Password" />
-            <button className="btn">Update</button>
-        </div>
+        <>
+            <div className="auth-page">
+                <div className="auth-card">
+                    <h2>Change Password</h2>
+
+                    <input type="password" placeholder="Current Password" />
+                    <input type="password" placeholder="New Password" />
+                    <input type="password" placeholder="Confirm New Password" />
+
+                    <button>Update Password</button>
+                </div>
+            </div>
+        </>
     );
 }
 
