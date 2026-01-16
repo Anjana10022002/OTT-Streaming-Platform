@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from adminApp import views
+from adminApp import views, include
 
 urlpatterns = [
     path('', views.login_page, name='login'),
@@ -27,4 +27,9 @@ urlpatterns = [
     path('movieview/', views.movieview_page, name='movieview'),
     path('chagepassword/', views.change_password, name='changepassword'),
     path('addmovie/', views.add_movie, name='addmovie'),
+    
+]
+
+urlpatterns += [
+    path('userapi/', include('userapi.urls')),
 ]

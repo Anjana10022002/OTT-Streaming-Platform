@@ -25,3 +25,4 @@ class User(AbstractBaseUser):
     objects = UserManager() 
  
     USERNAME_FIELD = 'email'
+
