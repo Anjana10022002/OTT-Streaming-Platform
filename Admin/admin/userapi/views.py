@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.authtoken.models import Token
+from .serializers import MovieSerializer
+from adminApp.models import Movie
 
 
 @api_view(['POST'])
@@ -41,3 +43,10 @@ def Login(request):
                         status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
     return Response({'token': token.key},status=HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def movie_list(request):
+    movie_list = Movie.objects.all()
+    serializer = MovieSerializer(movie_list, many=True)
+    return Response(serializer.data)
