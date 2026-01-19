@@ -3,6 +3,10 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.http import JsonResponse    
 from adminApp.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
+from rest_framework.authtoken.models import Token
 
 
 @api_view(['POST'])
@@ -22,40 +26,18 @@ def Signup(request):
         user.save()
         return JsonResponse({'message':'user created successsfully'} ,status = 200)
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
 def Login(request):
     email = request.data.get("email")
     password = request.data.get("password")
-
-    if not email or not password:
-        return Response(
-            {"message": "Email and password are required"},
-            status=400
-        )
-
-    try:
-        user = User.objects.get(email=email)
-    except User.DoesNotExist:
-        return Response(
-            {"message": "Invalid email or password"},
-            status=400
-        )
-
-    if not user.check_password(password):
-        return Response(
-            {"message": "Invalid email or password"},
-            status=400
-        )
-
-    return JsonResponse(
-        {
-            "message": "Login successful",
-            "user": {
-                "id": user.id,
-                "email": user.email,
-                "name": user.name
-            }
-        },
-        status=200
-    )
+    if email is None or password is None:
+        return Response({'error': 'Please provide both email and password'},
+                        status=HTTP_400_BAD_REQUEST)
+    user = authenticate(email=email, password=password)
+    if not user:
+        return Response({'error': 'Invalid Credentials'},
+                        status=HTTP_404_NOT_FOUND)
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key},status=HTTP_200_OK)

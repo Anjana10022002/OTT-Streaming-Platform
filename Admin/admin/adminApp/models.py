@@ -27,10 +27,18 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
 class Movie(models.Model):
-    thumbnail = models.ImageField(upload_to='thumbnails/')  
+    thumbnail = models.FileField(upload_to='thumbnails/')  
     title = models.CharField(max_length=255)
     description = models.TextField()
     video_file = models.FileField(upload_to='videos/')
-    count = models.IntegerField(default=0)
+    count = models.IntegerField(default=0)    
 
-    
+class watchlist(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+class watchHistory(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    watched_on = models.DateTimeField(auto_now_add=True)  
+
