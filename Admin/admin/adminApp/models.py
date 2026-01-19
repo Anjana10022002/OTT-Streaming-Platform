@@ -26,3 +26,11 @@ class User(AbstractBaseUser):
  
     USERNAME_FIELD = 'email'
 
+class Movie(models.Model):
+    thumbnail = models.ImageField(upload_to='thumbnails/')  
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    video_file = models.FileField(upload_to='videos/')
+    count = models.IntegerField(default=0)
+
+    

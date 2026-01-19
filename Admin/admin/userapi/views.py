@@ -21,3 +21,41 @@ def Signup(request):
         user.name = name
         user.save()
         return JsonResponse({'message':'user created successsfully'} ,status = 200)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def Login(request):
+    email = request.data.get("email")
+    password = request.data.get("password")
+
+    if not email or not password:
+        return Response(
+            {"message": "Email and password are required"},
+            status=400
+        )
+
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        return Response(
+            {"message": "Invalid email or password"},
+            status=400
+        )
+
+    if not user.check_password(password):
+        return Response(
+            {"message": "Invalid email or password"},
+            status=400
+        )
+
+    return JsonResponse(
+        {
+            "message": "Login successful",
+            "user": {
+                "id": user.id,
+                "email": user.email,
+                "name": user.name
+            }
+        },
+        status=200
+    )
