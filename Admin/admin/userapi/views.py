@@ -54,7 +54,7 @@ def movie_list(request):
 
 @api_view(['GET'])
 @permission_classes((AllowAny,))
-def movie_detail(request, movie_id):
+def movie_by_id(request, movie_id):
     try:
         movie = Movie.objects.get(id=movie_id)
     except Movie.DoesNotExist:
