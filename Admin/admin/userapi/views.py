@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.authtoken.models import Token
-from .serializers import MovieSerializer
+from adminApp.serializers import MovieSerializer
 from adminApp.models import Movie
 
 
