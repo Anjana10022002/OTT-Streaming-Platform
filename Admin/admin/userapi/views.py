@@ -9,6 +9,7 @@ from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP
 from rest_framework.authtoken.models import Token
 from adminApp.serializers import MovieSerializer
 from adminApp.models import Movie
+from rest_framework import status
 
 
 @api_view(['POST'])
@@ -50,3 +51,17 @@ def movie_list(request):
     movie_list = Movie.objects.all()
     serializer = MovieSerializer(movie_list, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def movie_detail(request, movie_id):
+    try:
+        movie = Movie.objects.get(id=movie_id)
+    except Movie.DoesNotExist:
+        return Response(
+            {"message": "Movie not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data, status=status.HTTP_200_OK)
