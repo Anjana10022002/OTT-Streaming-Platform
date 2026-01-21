@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from adminApp.models import User, Movie, watchHistory
+from adminApp.models import User, Movie, WatchHistory
 from rest_framework import serializers  
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -13,14 +13,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-from rest_framework import serializers
-from adminApp.models import WatchHistory
-
-
 class WatchHistorySerializer(serializers.ModelSerializer):
     movie_title = serializers.CharField(source="movie_id.title", read_only=True)
     thumbnail = serializers.FileField(source="movie_id.thumbnail", read_only=True)
 
     class Meta:
-        model = watchHistory
+        model = WatchHistory
         fields = "__all__"

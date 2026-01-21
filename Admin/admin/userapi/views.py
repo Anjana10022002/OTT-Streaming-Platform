@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from django.http import JsonResponse    
 from adminApp.models import User
@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.authtoken.models import Token
 from adminApp.serializers import MovieSerializer, WatchHistorySerializer
-from adminApp.models import Movie, watchlist, User, watchHistory
+from adminApp.models import Movie, watchlist, User, WatchHistory
 from rest_framework import status
 
 
@@ -46,14 +46,14 @@ def Login(request):
     return Response({'token': token.key},status=HTTP_200_OK)
 
 @api_view(['GET'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def movie_list(request):
     movie_list = Movie.objects.all()
     serializer = MovieSerializer(movie_list, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def movie_by_id(request, movie_id):
     try:
         movie = Movie.objects.get(id=movie_id)
@@ -67,7 +67,7 @@ def movie_by_id(request, movie_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def add_to_watchlist(request):
     user_id = request.data.get("user_id")
     movie_id = request.data.get("movie_id")
@@ -105,7 +105,7 @@ def add_to_watchlist(request):
 
 
 @api_view(['GET'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def view_watchlist(request, user_id):
     try:
         user = User.objects.get(id=user_id)
@@ -123,7 +123,7 @@ def view_watchlist(request, user_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def remove_from_watchlist(request):
     user_id = request.data.get("user_id")
     movie_id = request.data.get("movie_id")
@@ -153,11 +153,77 @@ def remove_from_watchlist(request):
     )
 
 @api_view(['GET'])
-@permission_classes((AllowAny,))
+@permission_classes((IsAuthenticated,))
 def view_history(request, user_id):
-    history = watchHistory.objects.filter(
+    history = WatchHistory.objects.filter(
         user_id_id=user_id
     ).order_by("-watched_on")
 
     serializer = WatchHistorySerializer(history, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_history(request):
+    user_id = request.data.get("user_id")
+    movie_id = request.data.get("movie_id")
+
+    if not user_id or not movie_id:
+        return Response(
+            {"message": "user_id and movie_id are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        user = User.objects.get(id=user_id)
+        movie = Movie.objects.get(id=movie_id)
+    except (User.DoesNotExist, Movie.DoesNotExist):
+        return Response(
+            {"message": "User or Movie not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    WatchHistory.objects.create(
+        user_id=user,
+        movie_id=movie
+    )
+
+    return Response(
+        {"message": "Movie added to watch history"},
+        status=status.HTTP_201_CREATED
+    )
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def change_password(request):
+    user_id = request.data.get("user_id")
+    old_password = request.data.get("old_password")
+    new_password = request.data.get("new_password")
+
+    if not user_id or not old_password or not new_password:
+        return Response(
+            {"message": "user_id, old_password, and new_password are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response(
+            {"message": "User not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if not user.check_password(old_password):
+        return Response(
+            {"message": "Old password is incorrect"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    user.set_password(new_password)
+    user.save()
+
+    return Response(
+        {"message": "Password changed successfully"},
+        status=status.HTTP_200_OK
+    )   

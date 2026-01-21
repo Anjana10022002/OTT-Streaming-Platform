@@ -38,7 +38,7 @@ class watchlist(models.Model):
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     added_on = models.DateTimeField(auto_now_add=True)  
 
-class watchHistory(models.Model):
+class WatchHistory(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE)
     watched_on = models.DateTimeField(auto_now_add=True)  
