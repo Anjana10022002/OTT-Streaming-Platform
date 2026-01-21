@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.authtoken.models import Token
-from adminApp.serializers import MovieSerializer
+from adminApp.serializers import MovieSerializer, WatchHistorySerializer
 from adminApp.models import Movie, watchlist, User, watchHistory
 from rest_framework import status
 
@@ -87,9 +87,9 @@ def add_to_watchlist(request):
             status=status.HTTP_404_NOT_FOUND
         )
 
-    watchlist, created = watchlist.objects.get_or_create(
-        user=user,
-        movie=movie
+    watchlist_item, created = watchlist.objects.get_or_create(
+        user_id=user,
+        movie_id=movie
     )
 
     if not created:
@@ -102,3 +102,62 @@ def add_to_watchlist(request):
         {"message": "Movie added to watchlist"},
         status=status.HTTP_201_CREATED
     )
+
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def view_watchlist(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response(
+            {"message": "User not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    watchlist_items = watchlist.objects.filter(user_id=user).select_related('movie_id')
+
+    movies = [item.movie_id for item in watchlist_items]
+    serializer = MovieSerializer(movies, many=True)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def remove_from_watchlist(request):
+    user_id = request.data.get("user_id")
+    movie_id = request.data.get("movie_id")
+
+    if not user_id or not movie_id:
+        return Response(
+            {"message": "user_id and movie_id are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        watchlist_item = watchlist.objects.get(
+            user_id_id=user_id,
+            movie_id_id=movie_id
+        )
+    except watchlist.DoesNotExist:
+        return Response(
+            {"message": "Movie not found in watchlist"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    watchlist_item.delete()
+
+    return Response(
+        {"message": "Movie removed from watchlist"},
+        status=status.HTTP_200_OK
+    )
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def view_history(request, user_id):
+    history = watchHistory.objects.filter(
+        user_id_id=user_id
+    ).order_by("-watched_on")
+
+    serializer = WatchHistorySerializer(history, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -7,4 +7,9 @@ urlpatterns = [
     path('movieList/', views.movie_list, name='movie_list_api'),
     path('movieID/<int:movie_id>/', views.movie_by_id, name='movie_detail_api'),
     path('watchlist/add/', views.add_to_watchlist, name='add_to_watchlist_api'),
+    path('watchlist/<int:user_id>/', views.view_watchlist, name='view_watchlist_api'),
+    path('watchlist/remove/', views.remove_from_watchlist, name='remove_watchlist_api'),
+    path('history/<int:user_id>/', views.view_history, name='view_history_api'),
+
+
 ]
