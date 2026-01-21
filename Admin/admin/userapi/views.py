@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.authtoken.models import Token
 from adminApp.serializers import MovieSerializer
-from adminApp.models import Movie
+from adminApp.models import Movie, watchlist, User, watchHistory
 from rest_framework import status
 
 
@@ -65,3 +65,40 @@ def movie_by_id(request, movie_id):
 
     serializer = MovieSerializer(movie)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def add_to_watchlist(request):
+    user_id = request.data.get("user_id")
+    movie_id = request.data.get("movie_id")
+
+    if not user_id or not movie_id:
+        return Response(
+            {"message": "user_id and movie_id are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        user = User.objects.get(id=user_id)
+        movie = Movie.objects.get(id=movie_id)
+    except (User.DoesNotExist, Movie.DoesNotExist):
+        return Response(
+            {"message": "User or Movie not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    watchlist, created = watchlist.objects.get_or_create(
+        user=user,
+        movie=movie
+    )
+
+    if not created:
+        return Response(
+            {"message": "Movie already in watchlist"},
+            status=status.HTTP_200_OK
+        )
+
+    return Response(
+        {"message": "Movie added to watchlist"},
+        status=status.HTTP_201_CREATED
+    )
