@@ -23,13 +23,19 @@ function Register() {
         axios.post('http://127.0.0.1:8000/userapi/signup/',user).then(response=>{
             setErrorMessage('');
             navigate('/');
-        }).catch(error=>{
-            if(error.response.data.errors){
-                setErrorMessage(Object.values(error.response.data.errors).join(' '));
-            }else{
-                setErrorMessage('Failed to connect to api');
-            }
         })
+        .catch((error) => {
+    console.error(error);
+
+    if (error.response && error.response.data) {
+        setErrorMessage(
+            error.response.data.message ||
+            JSON.stringify(error.response.data)
+        );
+    } else {
+        setErrorMessage("Server not reachable");
+    }
+});
     }
 
     return (
@@ -40,6 +46,13 @@ function Register() {
                 {errorMessage && (
                     <p className="error-text">{errorMessage}</p>
                 )}
+
+                <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                />
 
                 <input
                     type="email"
