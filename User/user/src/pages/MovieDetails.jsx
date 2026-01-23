@@ -40,23 +40,21 @@ function MovieDetails() {
                 <div className="movie-info">
                     <h2>{movie.title}</h2>
 
-                    <div className="movie-meta">
+                    {/* <div className="movie-meta">
                         <span>{movie.year}</span>
                         <span>•</span>
                         <span>{movie.genre}</span>
                         <span>•</span>
                         <span>{movie.duration}</span>
-                    </div>
+                    </div> */}
 
                     <p className="movie-description">
-                        This is the full description of the movie. It gives an
-                        overview of the storyline, main characters, and what
-                        makes the movie interesting for viewers.
+                        {movie.description}
                     </p>
 
                     <div className="movie-actions">
                         <button className="btn primary">▶ Watch Now</button>
-                        <button className="btn secondary">＋ Add to Watchlist</button>
+                        <button className="btn secondary">+ Add to Watchlist</button>
                     </div>
                 </div>
             </div>
