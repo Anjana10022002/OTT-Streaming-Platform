@@ -2,6 +2,7 @@ import React from "react";
 import BackButton from "../components/BackButton";
 
 function MovieDetails() {
+    
     return (
         <div className="container">
             <BackButton />

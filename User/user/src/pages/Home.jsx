@@ -1,17 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
+import axios from "axios";
+import { useState, useEffect, use } from "react";
+
 
 function Home() {
+    const [movies, setMovies] = useState([]); 
+    const navigate = useNavigate(); 
+
+
+    function fetchMovies() {
+    axios.get("http://127.0.0.1:8000/userapi/movieList/", {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => {
+        setMovies(response.data);
+        console.log("Fetched movies:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+      });
+    }
+
+    useEffect(() => {
+        fetchMovies();
+    }, []);
     return (
         <>
-            {/* Navbar on top */}
             <Navbar />
-
-            {/* Hero / Carousel */}
             <section className="hero-carousel">
                 <img
-                    src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78"
+                    src=""
                     alt="Featured Movie"
                     className="hero-carousel-bg"
                 />
@@ -19,13 +41,13 @@ function Home() {
                 <div className="hero-carousel-overlay"></div>
 
                 <div className="hero-carousel-content">
-                    <h1>SAND DUST</h1>
+                    <h1></h1>
                     <p>
-                        A gripping adventure across harsh lands, survival,
-                        courage, and destiny.
+                       
                     </p>
 
                     <div className="hero-carousel-actions">
+                      
                         <Link to="/movie/1" className="btn primary">
                             ▶ Play Now
                         </Link>
@@ -35,6 +57,7 @@ function Home() {
                     </div>
                 </div>
             </section>
+
 
             <main className="container">
                 <div className="home-header">
@@ -51,31 +74,10 @@ function Home() {
                 <section className="home-section">
                     <h3 className="section-title">Trending Now</h3>
                     <div className="movie-grid">
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                    </div>
-                </section>
-
-                <section className="home-section">
-                    <h3 className="section-title" >New Releases</h3>
-                    <div className="movie-grid">
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                    </div>
-                </section>
-
-                <section className="home-section">
-                    <h3 className="section-title">Recommended For You</h3>
-                    <div className="movie-grid">
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                    </div>
+                        {movies.map((movie) => (
+                            <MovieCard key={movie.id} movie={movie} />
+                        ))}
+                     </div>
                 </section>
             </main>
         </>

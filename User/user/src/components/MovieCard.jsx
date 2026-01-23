@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
-function MovieCard() {
+function MovieCard({ movie }) {
     return (
-        <Link to="/movie/1" className="movie-card">
+        <Link to={`/movie/${movie.id}`} className="movie-card">
             <img
-                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8O-2z5c1HeUS7ToIaVHIlAmvy_MTAVnJnhYyvN7FyNJBxjZaNqFmV9xWWBb8f26rRgfTc9GQlWMWVQPdmS56NfRD4pYIxO0B-pZ_vV2t1cnSikgDOPc0k8eufiQXX4Ud3bLangQIR_Og/s1600/horizon.jpg"
-                alt="movie"
+                src={movie.banner_url}
+                alt={movie.title}
             />
             <div className="movie-title-overlay">
-                Inception
+                {movie.title}
             </div>
         </Link>
     );

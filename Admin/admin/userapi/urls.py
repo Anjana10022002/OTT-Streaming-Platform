@@ -13,3 +13,7 @@ urlpatterns = [
     path('history/add/', views.add_history, name='add_history_api'),
     path('changePassword/', views.change_password, name='change_password_api'), 
 ]
+
+
+
+# api for searching movies by title
