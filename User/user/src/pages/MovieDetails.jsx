@@ -1,28 +1,51 @@
 import React from "react";
+import { useEffect, useNavigate } from "react";
 import BackButton from "../components/BackButton";
 
 function MovieDetails() {
-    
+    const { id } = useParams();
+    const [movie, setMovie] = React.useState(null);
+    const navigate = useNavigate();
+
+    function fetchMovieDetails() {
+        axios.get(`http://127.0.0.1:8000/userapi/movieDetails/${id}/`, {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+        })
+            .then((response) => {
+                setMovie(response.data);
+                console.log("Fetched movie details:", response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching movie details:", error);
+            }); [id, navigate]
+    }
+
+    useEffect(() => {
+        fetchMovieDetails();
+    }, [id]);
+
     return (
         <div className="container">
             <BackButton />
             <div className="movie-details-page">
                 <div className="movie-poster">
                     <img
-                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8O-2z5c1HeUS7ToIaVHIlAmvy_MTAVnJnhYyvN7FyNJBxjZaNqFmV9xWWBb8f26rRgfTc9GQlWMWVQPdmS56NfRD4pYIxO0B-pZ_vV2t1cnSikgDOPc0k8eufiQXX4Ud3bLangQIR_Og/s1600/horizon.jpg"
-                        height={450} width={300} alt="Movie Poster"
+                        src={movie.thumbnail}
+                        alt={movie.title}
                     />
                 </div>
 
                 <div className="movie-info">
-                    <h2>Movie Title</h2>
+                    <h2>{movie.title}</h2>
 
                     <div className="movie-meta">
-                        <span>2024</span>
+                        <span>{movie.year}</span>
                         <span>•</span>
-                        <span>Action / Adventure</span>
+                        <span>{movie.genre}</span>
                         <span>•</span>
-                        <span>2h 18m</span>
+                        <span>{movie.duration}</span>
                     </div>
 
                     <p className="movie-description">
