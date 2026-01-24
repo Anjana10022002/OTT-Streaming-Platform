@@ -20,7 +20,7 @@ function MovieDetails() {
             .catch((error) => {
                 console.error("Error fetching movie details:", error);
             }); [id, navigate]
-            
+
     }
 
     useEffect(() => {
@@ -40,15 +40,6 @@ function MovieDetails() {
 
                 <div className="movie-info">
                     <h2>{movie.title}</h2>
-
-                    {/* <div className="movie-meta">
-                        <span>{movie.year}</span>
-                        <span>•</span>
-                        <span>{movie.genre}</span>
-                        <span>•</span>
-                        <span>{movie.duration}</span>
-                    </div> */}
-
                     <p className="movie-description">
                         {movie.description}
                     </p>
