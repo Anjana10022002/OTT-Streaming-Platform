@@ -34,7 +34,7 @@ function Home() {
             <section className="hero-carousel">
                 <img
                     src=""
-                    alt="Featured Movie"
+                    alt=""
                     className="hero-carousel-bg"
                 />
 
