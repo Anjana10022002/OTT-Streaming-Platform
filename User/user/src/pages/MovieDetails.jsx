@@ -20,6 +20,7 @@ function MovieDetails() {
             .catch((error) => {
                 console.error("Error fetching movie details:", error);
             }); [id, navigate]
+            
     }
 
     useEffect(() => {
