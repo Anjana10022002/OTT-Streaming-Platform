@@ -24,7 +24,9 @@ function MovieDetails() {
     }
 
     useEffect(() => {
-        fetchMovieDetails();
+        fetchMovieDetail
+        
+        s();
     }, [id]);
 
     return (
