@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useNavigate } from "react";
 import BackButton from "../components/BackButton";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function MovieDetails() {
     const { id } = useParams();
@@ -24,9 +26,7 @@ function MovieDetails() {
     }
 
     useEffect(() => {
-        fetchMovieDetail
-        
-        s();
+        fetchMovieDetails();
     }, [id]);
 
     return (
