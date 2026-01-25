@@ -10,7 +10,7 @@ function MovieDetails() {
     const navigate = useNavigate();
 
     function fetchMovieDetails() {
-        axios.get(`http://127.0.0.1:8000/userapi/movieDetails/${id}/`, {
+        axios.get(`http://127.0.0.1:8000/userapi/movieDetail/${id}/`, {
             headers: {
                 Authorization: `Token ${localStorage.getItem("token")}`,
             },
