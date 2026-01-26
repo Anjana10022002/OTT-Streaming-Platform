@@ -1,56 +1,31 @@
-import React from "react";
-import { useEffect, useNavigate } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 function MovieDetails() {
     const { id } = useParams();
-    const [movie, setMovie] = React.useState(null);
-    const navigate = useNavigate();
+    const [movie, setMovie] = useState(null);
 
-    function fetchMovieDetails() {
-        axios.get(`http://127.0.0.1:8000/userapi/movieDetail/${id}/`, {
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/userapi/movieID/${id}/`, {
             headers: {
                 Authorization: `Token ${localStorage.getItem("token")}`,
             },
         })
-            .then((response) => {
-                setMovie(response.data);
-                console.log("Fetched movie details:", response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching movie details:", error);
-            }); [id, navigate]
-
-    }
-
-    useEffect(() => {
-        fetchMovieDetails();
+        .then(res => setMovie(res.data))
+        .catch(err => console.error(err));
     }, [id]);
+
+    if (!movie) return null;
 
     return (
         <div className="container">
             <BackButton />
             <div className="movie-details-page">
-                <div className="movie-poster">
-                    <img
-                        src={movie.thumbnail}
-                        alt={movie.title}
-                    />
-                </div>
-
-                <div className="movie-info">
-                    <h2>{movie.title}</h2>
-                    <p className="movie-description">
-                        {movie.description}
-                    </p>
-
-                    <div className="movie-actions">
-                        <button className="btn primary">▶ Watch Now</button>
-                        <button className="btn secondary">+ Add to Watchlist</button>
-                    </div>
-                </div>
+                <img src={movie.thumbnail} alt={movie.title} />
+                <h2>{movie.title}</h2>
+                <p>{movie.description}</p>
             </div>
         </div>
     );
