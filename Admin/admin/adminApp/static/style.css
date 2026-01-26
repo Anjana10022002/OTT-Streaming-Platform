@@ -29,7 +29,6 @@ button:focus {
     outline: none;
 }
 
-/* NAVBAR */
 
 .ott-navbar {
     background-color: #ffffff;
@@ -84,8 +83,6 @@ button:focus {
 .nav-right {
     position: relative;
 }
-
-/* ADMIN DROPDOWN */
 
 .admin-menu {
     position: relative;
@@ -149,7 +146,6 @@ button:focus {
     background-color: #fecaca;
 }
 
-/* TABLE */
 
 table {
     width: 100%;
