@@ -19,8 +19,8 @@ from django.urls import path, include
 from adminApp import views
 
 urlpatterns = [
-    path('', views.login_page, name='login'),
-    path('home/', views.home_page, name='home'),
+    path('', views.admin_login, name='admin_login'),
+    path('home/', views.admin_home, name='admin_home'),
     path('movielist/', views.movielist_page, name='movielist'),
     path('userlist/', views.userlist_page, name='userlist'),
     path('report/', views.report_page, name='report'),

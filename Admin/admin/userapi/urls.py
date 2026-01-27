@@ -17,3 +17,4 @@ urlpatterns = [
 
 
 # api for searching movies by title
+# python manage.py create superuser for creating admin

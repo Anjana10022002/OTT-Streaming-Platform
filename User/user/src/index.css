@@ -553,3 +553,59 @@ input:focus {
         width: 100%;
     }
 } 
+
+.movie-detail-container {
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+}
+
+.movie-hero {
+    min-height: 80vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 60px;
+}
+
+.movie-hero-content {
+    max-width: 600px;
+}
+
+.movie-hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.movie-description {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.movie-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn.primary {
+    background: #e50914;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn.secondary {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+}
+
+.status-msg {
+    margin-top: 15px;
+    color: #0f0;
+}
