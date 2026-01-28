@@ -29,40 +29,51 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
 from .models import User
 
+# def admin_login(request):
+#     if request.method == "POST":
+#         email = request.POST.get("email")
+#         password = request.POST.get("password")
+
+#         try:
+#             user = User.objects.get(email=email, is_admin=True, is_active=True)
+#         except User.DoesNotExist:
+#             messages.error(request, "Invalid admin credentials")
+#             return render(request, "login.html")
+
+#         if not check_password(password, user.password):
+#             messages.error(request, "Invalid admin credentials")
+#             return render(request, "login.html")
+        
+#         token, _ = Token.objects.get_or_create(user_id=user.id)
+
+#         request.session["admin_id"] = user.id
+#         request.session["admin_token"] = token.key
+
+#         return redirect("admin_home")
+
+#     return render(request, "login.html")
+
+from django.contrib.auth import authenticate, login
+
 def admin_login(request):
     if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
+        email = request.POST["email"]
+        password = request.POST["password"]
 
-        try:
-            user = User.objects.get(email=email, is_admin=True, is_active=True)
-        except User.DoesNotExist:
-            messages.error(request, "Invalid admin credentials")
-            return render(request, "login.html")
-
-        if not check_password(password, user.password):
-            messages.error(request, "Invalid admin credentials")
-            return render(request, "login.html")
-        
-        token, _ = Token.objects.get_or_create(user_id=user.id)
-
-        request.session["admin_id"] = user.id
-        request.session["admin_token"] = token.key
-
-        return redirect("admin_home")
+        user = authenticate(request, email=email, password=password)
+        if user:
+            login(request, user)
+            return redirect("admin_home")
 
     return render(request, "login.html")
 
-@login_required(login_url='/admin_login/')
+
+@login_required(login_url="/")
 def admin_home(request):
-    if not request.session.get("admin_id"):
-        return redirect("admin_login")
+        return render(request, "home.html")
 
-    token = request.session.get("admin_token")
-    return render(request, "home.html", {"token": token})
-
-@login_required(login_url='/admin_login/')
+@login_required(login_url="/")
 def admin_logout(request):
     if request.method == "POST":
-        request.session.flush()
+        logout(request)
         return redirect("admin_login")

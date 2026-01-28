@@ -27,6 +27,7 @@ urlpatterns = [
     path('movieview/', views.movieview_page, name='movieview'),
     path('chagepassword/', views.change_password, name='changepassword'),
     path('addmovie/', views.add_movie, name='addmovie'),
+    path('logout/', views.admin_logout, name='admin_logout'),
     
 ]
 

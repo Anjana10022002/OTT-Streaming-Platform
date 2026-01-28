@@ -1,3 +1,4 @@
+/* ---------------- RESET ---------------- */
 * {
     margin: 0;
     padding: 0;
@@ -29,7 +30,7 @@ button:focus {
     outline: none;
 }
 
-
+/* ---------------- NAVBAR ---------------- */
 .ott-navbar {
     background-color: #ffffff;
     padding: 16px 28px;
@@ -50,7 +51,6 @@ button:focus {
     font-size: 19px;
     font-weight: 700;
     color: #2563eb;
-    letter-spacing: 0.4px;
 }
 
 .nav-left a {
@@ -80,73 +80,98 @@ button:focus {
     width: 100%;
 }
 
+/* ---------------- ADMIN DROPDOWN ---------------- */
 .nav-right {
     position: relative;
 }
 
-.admin-menu {
-    position: relative;
-}
-
+/* Admin button */
 .admin-btn {
-    background-color: #f1f5f9;
+    background: #f1f5f9;
     border: 1px solid #dbe1ea;
-    padding: 8px 16px;
+    padding: 8px 14px;
     font-size: 14px;
-    font-weight: 500;
-    color: #111827;
+    border-radius: 6px;
 }
 
-.admin-btn::-webkit-details-marker {
-    display: none;
-}
-
+/* Dropdown box */
 .menu-box {
     position: absolute;
-    top: 48px;
+    top: calc(100% + 6px);
     right: 0;
-    min-width: 200px;
-    background-color: #ffffff;
+    width: 180px;
+    background: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    padding: 4px 0;
+    display: none;
     z-index: 1000;
 }
 
-.admin-menu .menu-box {
-    display: none;
-}
-
-.admin-menu[open] .menu-box {
+/* Show via JS */
+.menu-box.show {
     display: block;
 }
 
+/* Dropdown items */
 .menu-box a,
-.menu-box button {
+.menu-box form button {
     width: 100%;
-    padding: 14px 18px;
+    padding: 10px 14px;
     background: none;
     border: none;
     text-align: left;
     font-size: 14px;
     color: #374151;
+    cursor: pointer;
 }
 
-.menu-box a:hover {
-    background-color: #f3f4f6;
+.menu-box a:hover,
+.menu-box form button:hover {
+    background: #f3f4f6;
 }
 
+/* Logout */
 .logoutbtn {
-    background-color: #fee2e2;
     color: #b91c1c;
     font-weight: 600;
 }
 
 .logoutbtn:hover {
-    background-color: #fecaca;
+    background: #fee2e2;
+}
+
+/* ===== FIX DROPDOWN FORM OVERRIDE ===== */
+
+/* Remove global form styling inside dropdown */
+.menu-box form {
+    background: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    box-shadow: none;
+}
+
+/* Make logout button look like menu item */
+.menu-box form button {
+    width: 100%;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    color: #b91c1c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.menu-box form button:hover {
+    background: #fee2e2;
 }
 
 
+/* ---------------- TABLES ---------------- */
 table {
     width: 100%;
     border-collapse: separate;
@@ -177,18 +202,11 @@ td {
     border-bottom: 1px solid #eef2f7;
 }
 
-tbody tr {
-    transition: background-color 0.2s ease;
-}
-
 tbody tr:hover {
     background-color: #f8fafc;
 }
 
-tbody tr:last-child td {
-    border-bottom: none;
-}
-
+/* ---------------- FORMS ---------------- */
 form {
     background-color: #ffffff;
     padding: 36px;
@@ -201,7 +219,6 @@ label {
     font-weight: 600;
     margin-bottom: 6px;
     display: block;
-    color: #374151;
 }
 
 input,
@@ -218,7 +235,6 @@ textarea:focus {
     border-color: #2563eb;
 }
 
-
 form button {
     background-color: #2563eb;
     color: #ffffff;
@@ -229,7 +245,7 @@ form button:hover {
     background-color: #1e40af;
 }
 
-
+/* ---------------- LOGIN ---------------- */
 .login-container {
     display: flex;
     justify-content: center;
@@ -237,6 +253,7 @@ form button:hover {
     min-height: 100vh;
 }
 
+/* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
     body {
         padding: 16px;
