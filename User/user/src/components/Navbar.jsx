@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");   // if stored
+        setOpen(false);
+        navigate("/login");
+    }
 
     return (
         <div className="navbar">
@@ -24,8 +32,16 @@ function Navbar() {
 
                         {open && (
                             <div className="profile-dropdown">
-                                <Link to="/change-password">Change Password</Link>
-                                <button className="logout-btn">Logout</button>
+                                <Link to="/change-password">
+                                    Change Password
+                                </Link>
+
+                                <button
+                                    className="logout-btn"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </button>
                             </div>
                         )}
                     </div>

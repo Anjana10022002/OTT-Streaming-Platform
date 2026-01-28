@@ -9,19 +9,6 @@
         <a href="{% url 'report' %}">Reports</a>
     </div>
 
-    <!-- <div class="nav-right">
-        <details class="admin-menu">
-            <summary class="admin-btn">Admin</summary>
-            <div class="menu-box">
-                <a href="{% url 'changepassword' %}">Change Password</a>
-                <form method="post" action="{% url 'admin_logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="logoutbtn">Logout</button>
-                </form>
-            </div>
-        </details>
-    </div> -->
-
     <div class="nav-right">
     <button class="admin-btn" onclick="toggleMenu()">Admin ▼</button>
 
