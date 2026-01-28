@@ -1,24 +1,21 @@
 {% load static %}
 
-<nav class="ott-navbar">
-    <div class="nav-left">
-        <span class="brand">OTT Admin</span>
+<aside class="sidebar">
+    <div class="sidebar-brand">OTT Admin</div>
+
+    <nav class="sidebar-menu">
         <a href="{% url 'admin_home' %}">Home</a>
         <a href="{% url 'movielist' %}">Movies</a>
         <a href="{% url 'userlist' %}">Users</a>
         <a href="{% url 'report' %}">Reports</a>
-    </div>
+    </nav>
 
-    <div class="nav-right">
-    <button class="admin-btn" onclick="toggleMenu()">Admin ▼</button>
-
-    <div class="menu-box" id="adminMenu">
+    <div class="sidebar-footer">
         <a href="{% url 'changepassword' %}">Change Password</a>
+
         <form method="post" action="{% url 'admin_logout' %}">
             {% csrf_token %}
             <button type="submit" class="logoutbtn">Logout</button>
         </form>
     </div>
-</div>
-
-</nav>
+</aside>
