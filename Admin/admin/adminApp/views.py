@@ -35,12 +35,10 @@ def admin_login(request):
         email = request.POST["email"]
         password = request.POST["password"]
 
-        user = authenticate(request, username=email, password=password)
-        if user is not None:
+        user = authenticate(request, email=email, password=password)
+        if user:
             login(request, user)
             return redirect("admin_home")
-        else:
-            messages.error(request, "Invalid email or password")
 
     return render(request, "login.html")
 

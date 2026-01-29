@@ -25,6 +25,19 @@ function Home() {
       });
     }
 
+    function searchMovies() {
+        axios.get(
+            `http://127.0.0.1:8000/userapi/movie/search/?q=${searchText}`,
+            {
+                headers: {
+                    Authorization: `Token ${localStorage.getItem("token")}`,
+                },
+            }
+        )
+        .then(res => setMovies(res.data))
+        .catch(err => console.error(err));
+    }
+
     useEffect(() => {
         fetchMovies();
     }, []);

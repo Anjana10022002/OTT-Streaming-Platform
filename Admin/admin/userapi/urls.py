@@ -11,7 +11,8 @@ urlpatterns = [
     path('watchlist/remove/', views.remove_from_watchlist, name='remove_watchlist_api'),
     path('history/<int:user_id>/', views.view_history, name='view_history_api'),
     path('history/add/', views.add_history, name='add_history_api'),
-    path('changePassword/', views.change_password, name='change_password_api'), 
+    path('changePassword/', views.change_password, name='change_password_api'),
+    path('movie/search/', views.search_movies, name ='search_movies')
 ]
 
 
