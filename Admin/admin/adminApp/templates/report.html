@@ -9,19 +9,25 @@
     </head>
    
 <body>
-    {% include 'partials/navbar.html' %}
-    <div class="page-container">
-    <h1 class="page-title">Movie List</h1>
+    <div class="admin-layout">
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Movie Title</th>
-                <th>Total Views</th>
-            </tr>
-        </thead>
-        <tbody>
-        </table>
+        {% include 'partials/navbar.html' %}
+
+        <main class="main-content">
+            <h1>Report</h1>
+            <div class="table-wrapper"></div>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Movie Title</th>
+                        <th>Total Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+            </table>
+        </main>
+    </div>
 </body>
 </html>

@@ -8,22 +8,28 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
 <body>
-    {% include 'partials/navbar.html' %}
-    <div class="page-container">
-    <h1 class="page-title">Movie List</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>History</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                
+    <div class="admin-layout">
 
-            </tr>
-    </table>  
+    {% include 'partials/navbar.html' %}
+
+    <main class="main-content">
+        <h1>User List</h1>
+        <div class="table-wrapper">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>History</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    
+
+                </tr>
+        </table>
+    </main> 
+    </div> 
 </body>
 </html>

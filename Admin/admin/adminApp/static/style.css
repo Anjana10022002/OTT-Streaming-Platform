@@ -1,4 +1,4 @@
-/* 
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -6,16 +6,52 @@
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+/* ================= GLOBAL BACKGROUND ================= */
 body {
-    background: #f4f6fb;
+    background: linear-gradient(180deg, #f8fafc, #eef2f7);
     color: #1f2937;
 }
 
+/* ================= ADMIN LAYOUT ================= */
 .admin-layout {
     display: flex;
     min-height: 100vh;
 }
 
+.primary-btn {
+    display: inline-block;
+    margin: 16px 0 20px;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.primary-btn:hover {
+    background: #1e40af;
+}
+
+/* ================= SIDEBAR ================= */
 .sidebar {
     width: 240px;
     background: #0f172a;
@@ -32,7 +68,7 @@ body {
     margin-bottom: 32px;
 }
 
-
+/* Sidebar menu */
 .sidebar-menu a {
     display: block;
     padding: 12px 14px;
@@ -40,7 +76,8 @@ body {
     font-size: 14px;
     border-radius: 6px;
     color: #cbd5f5;
-    text-decoration: none;
+    position: relative;
+    z-index: 2;
 }
 
 .sidebar-menu a:hover {
@@ -48,9 +85,10 @@ body {
     color: #ffffff;
 }
 
+/* Sidebar footer */
 .sidebar-footer {
     margin-top: auto;
-    padding-top: 20px;
+    padding-top: 16px;
     border-top: 1px solid #1e293b;
 }
 
@@ -59,7 +97,6 @@ body {
     padding: 10px 14px;
     font-size: 13px;
     color: #cbd5f5;
-    text-decoration: none;
 }
 
 .sidebar-footer a:hover {
@@ -70,14 +107,23 @@ body {
     margin-top: 10px;
 }
 
+/* remove form card styling ONLY for logout */
+.logout-form {
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    position: static;
+}
+
 .logoutbtn {
     width: 100%;
     padding: 10px;
     background: #dc2626;
     color: #ffffff;
     border-radius: 6px;
-    border: none;
     font-weight: 600;
+    border: none;
     cursor: pointer;
 }
 
@@ -85,19 +131,24 @@ body {
     background: #b91c1c;
 }
 
+
 .main-content {
     flex: 1;
-    padding: 32px;
+    padding: 40px;
     background: linear-gradient(180deg, #f8fafc, #eef2f7);
+    margin-left: 0;
 }
+
 
 .main-content h1 {
     font-size: 28px;
     font-weight: 700;
-    margin-bottom: 24px;
-    color: #111827;
+    margin-bottom: 20px;
+    margin-top: 0;
 }
 
+
+/* ================= TABLES ================= */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -109,6 +160,10 @@ table {
 
 thead {
     background: #f9fafb;
+}
+
+.table-wrapper {
+    margin-top: 20px;
 }
 
 th {
@@ -131,6 +186,7 @@ tbody tr:hover {
     background: #f8fafc;
 }
 
+/* ================= FORMS ================= */
 form {
     background: #ffffff;
     padding: 36px;
@@ -159,7 +215,6 @@ textarea {
 input:focus,
 textarea:focus {
     border-color: #2563eb;
-    outline: none;
 }
 
 form button {
@@ -167,25 +222,36 @@ form button {
     color: #ffffff;
     padding: 12px 22px;
     border-radius: 6px;
-    border: none;
     font-weight: 600;
-    cursor: pointer;
 }
 
 form button:hover {
     background: #1e40af;
 }
 
+/* ================= LOGIN PAGE ================= */
+body.login-page {
+    background: linear-gradient(180deg, #f8fafc, #eef2f7);
+}
 
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(180deg, #f8fafc, #eef2f7);
 }
 
+.login-container form {
+    width: 380px;
+}
 
+.login-container h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
     .sidebar {
         width: 200px;
@@ -194,10 +260,4 @@ form button:hover {
     .main-content {
         padding: 24px;
     }
-} */
-
-
-body {
-    background: red !important;
 }
-

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'style.css' %}">
 
 
-<aside class="sidebar">
+<div class="sidebar">
     <div class="sidebar-brand">OTT Admin</div>
 
     <nav class="sidebar-menu">
@@ -10,14 +10,12 @@
         <a href="{% url 'movielist' %}">Movies</a>
         <a href="{% url 'userlist' %}">Users</a>
         <a href="{% url 'report' %}">Reports</a>
-    </nav>
-
-    <div class="sidebar-footer">
         <a href="{% url 'changepassword' %}">Change Password</a>
-
-        <form method="post" action="{% url 'admin_logout' %}">
+    </nav>
+    <div class="sidebar-footer">
+        <form method="post" action="{% url 'admin_logout' %}" class="logout-form">
             {% csrf_token %}
             <button type="submit" class="logoutbtn">Logout</button>
         </form>
     </div>
-</aside>
+</div>

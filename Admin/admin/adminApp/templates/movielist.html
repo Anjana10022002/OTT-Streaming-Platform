@@ -2,29 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie List</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
-    {% include 'partials/navbar.html' %}
-    <div class="page-container">
-    <h1 class="page-title">Movie List</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Thumbnail</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
 
-            </tr>
-    </table>
-    <button><a href="{% url 'addmovie' %}" class="primary-btn" style="color: black; text-decoration: none;" >Add Movie</a> </button>
+<body>
+<div class="admin-layout">
+
+    {% include 'partials/navbar.html' %}
+
+    <main class="main-content">
+        <h1>Movie List</h1>
+
+        <a href="{% url 'addmovie' %}" class="primary-btn">Add Movie</a>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thumbnail</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</div>
 </body>
 </html>

@@ -28,31 +28,6 @@ from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
 from .models import User
-
-# def admin_login(request):
-#     if request.method == "POST":
-#         email = request.POST.get("email")
-#         password = request.POST.get("password")
-
-#         try:
-#             user = User.objects.get(email=email, is_admin=True, is_active=True)
-#         except User.DoesNotExist:
-#             messages.error(request, "Invalid admin credentials")
-#             return render(request, "login.html")
-
-#         if not check_password(password, user.password):
-#             messages.error(request, "Invalid admin credentials")
-#             return render(request, "login.html")
-        
-#         token, _ = Token.objects.get_or_create(user_id=user.id)
-
-#         request.session["admin_id"] = user.id
-#         request.session["admin_token"] = token.key
-
-#         return redirect("admin_home")
-
-#     return render(request, "login.html")
-
 from django.contrib.auth import authenticate, login
 
 def admin_login(request):
@@ -60,19 +35,21 @@ def admin_login(request):
         email = request.POST["email"]
         password = request.POST["password"]
 
-        user = authenticate(request, email=email, password=password)
-        if user:
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
             login(request, user)
             return redirect("admin_home")
+        else:
+            messages.error(request, "Invalid email or password")
 
     return render(request, "login.html")
 
 
-@login_required(login_url="/")
+@login_required(login_url="admin_login")
 def admin_home(request):
         return render(request, "home.html")
 
-@login_required(login_url="/")
+@login_required(login_url="admin_login")
 def admin_logout(request):
     if request.method == "POST":
         logout(request)
