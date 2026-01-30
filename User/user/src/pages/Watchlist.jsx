@@ -5,22 +5,39 @@ import MovieCard from "../components/MovieCard";
 
 function Watchlist() {
     const [movies, setMovies] = useState([]);
-    const userId = localStorage.getItem("user_id");
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        if (!userId) return;
+        fetchWatchlist();
+    }, []);
 
-        axios.get(`http://127.0.0.1:8000/userapi/watchlist/${userId}/`, {
+    function fetchWatchlist() {
+        axios.get("http://127.0.0.1:8000/userapi/watchlist/", {
             headers: {
-                Authorization: `Token ${localStorage.getItem("token")}`,
+                Authorization: `Token ${token}`,
             },
         })
         .then(res => {
-            console.log("Watchlist movies:", res.data);
             setMovies(res.data);
         })
         .catch(err => console.error(err));
-    }, [userId]);
+    }
+
+    function removeFromWatchlist(movieId) {
+        axios.post(
+            "http://127.0.0.1:8000/userapi/watchlist/remove/",
+            { movie_id: movieId },
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            }
+        )
+        .then(() => {
+            fetchWatchlist(); // refresh list
+        })
+        .catch(err => console.error(err));
+    }
 
     return (
         <>
@@ -37,10 +54,12 @@ function Watchlist() {
                     {movies.length === 0 ? (
                         <p>No movies in watchlist</p>
                     ) : (
-                        movies.map(movie => (
+                        movies.map(item => (
                             <MovieCard
-                                key={movie.id}
-                                movie={movie}
+                                key={item.id}
+                                movie={item.movie}   // IMPORTANT
+                                showRemove
+                                onRemove={() => removeFromWatchlist(item.movie.id)}
                             />
                         ))
                     )}

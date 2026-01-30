@@ -55,6 +55,7 @@ function MovieDetails() {
     }, [id]);
 
     function addToWatchlist() {
+        console.log("Adding to watchlist:", id);
         axios.post(
             "http://127.0.0.1:8000/userapi/watchlist/add/",
             { movie_id: id },

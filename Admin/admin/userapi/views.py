@@ -56,6 +56,30 @@ def movie_list(request):
 @permission_classes((IsAuthenticated,))
 def movie_by_id(request, movie_id):
     try:
+        movies = Movie.objects.get(id=movie_id)
+    except Movie.DoesNotExist:
+        return Response(
+            {"message": "Movie not found"},
+            
+        )
+
+    serializer = MovieSerializer(movies)
+    return Response(serializer.data)
+
+    status=status.HTTP_404_NOT_FOUND
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_to_watchlist(request):
+    movie_id = request.data.get("movie_id")
+
+    if not movie_id:
+        return Response(
+            {"message": "movie_id is required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
         movie = Movie.objects.get(id=movie_id)
     except Movie.DoesNotExist:
         return Response(
@@ -63,94 +87,42 @@ def movie_by_id(request, movie_id):
             status=status.HTTP_404_NOT_FOUND
         )
 
-    serializer = MovieSerializer(movie)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-@api_view(['POST'])
-@permission_classes((IsAuthenticated,))
-def add_to_watchlist(request):
-    user_id = request.data.get("user_id")
-    movie_id = request.data.get("movie_id")
-
-    if not user_id or not movie_id:
-        return Response(
-            {"message": "user_id and movie_id are required"},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    try:
-        user = User.objects.get(id=user_id)
-        movie = Movie.objects.get(id=movie_id)
-    except (User.DoesNotExist, Movie.DoesNotExist):
-        return Response(
-            {"message": "User or Movie not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
-
     watchlist_item, created = watchlist.objects.get_or_create(
-        user_id=user,
-        movie_id=movie
+        user_id=request.user,     # ✅ FIX
+        movie_id=movie            # ✅ FIX
     )
 
     if not created:
-        return Response(
-            {"message": "Movie already in watchlist"},
-            status=status.HTTP_200_OK
-        )
+        return Response({"message": "Movie already in watchlist"})
 
-    return Response(
-        {"message": "Movie added to watchlist"},
-        status=status.HTTP_201_CREATED
-    )
-
+    return Response({"message": "Movie added to watchlist"}, status=201)
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
-def view_watchlist(request, user_id):
-    try:
-        user = User.objects.get(id=user_id)
-    except User.DoesNotExist:
-        return Response(
-            {"message": "User not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
-
-    watchlist_items = watchlist.objects.filter(user_id=user).select_related('movie_id')
+@permission_classes([IsAuthenticated])
+def view_watchlist(request):
+    watchlist_items = watchlist.objects.filter(
+        user_id=request.user
+    ).select_related("movie_id")
 
     movies = [item.movie_id for item in watchlist_items]
     serializer = MovieSerializer(movies, many=True)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
+@permission_classes([IsAuthenticated])
 def remove_from_watchlist(request):
-    user_id = request.data.get("user_id")
     movie_id = request.data.get("movie_id")
 
-    if not user_id or not movie_id:
-        return Response(
-            {"message": "user_id and movie_id are required"},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
     try:
-        watchlist_item = watchlist.objects.get(
-            user_id_id=user_id,
+        watchlist.objects.get(
+            user_id=request.user,
             movie_id_id=movie_id
-        )
+        ).delete()
     except watchlist.DoesNotExist:
-        return Response(
-            {"message": "Movie not found in watchlist"},
-            status=status.HTTP_404_NOT_FOUND
-        )
+        return Response({"message": "Not in watchlist"}, status=404)
 
-    watchlist_item.delete()
-
-    return Response(
-        {"message": "Movie removed from watchlist"},
-        status=status.HTTP_200_OK
-    )
+    return Response({"message": "Removed from watchlist"})
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
