@@ -116,9 +116,10 @@ def remove_from_watchlist(request):
 def view_history(request, user_id):
     history = WatchHistory.objects.filter(
         user_id_id=user_id
-    ).order_by("-watched_on")
+    ).select_related("movie_id").order_by("-watched_on")
 
-    serializer = WatchHistorySerializer(history, many=True)
+    movies = [item.movie_id for item in history]
+    serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
