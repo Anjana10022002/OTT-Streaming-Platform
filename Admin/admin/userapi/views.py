@@ -106,8 +106,8 @@ def view_watchlist(request):
 
     movies = [item.movie_id for item in watchlist_items]
     serializer = MovieSerializer(movies, many=True)
-
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

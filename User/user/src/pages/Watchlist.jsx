@@ -34,7 +34,7 @@ function Watchlist() {
             }
         )
         .then(() => {
-            fetchWatchlist(); // refresh list
+            fetchWatchlist();
         })
         .catch(err => console.error(err));
     }
@@ -54,12 +54,12 @@ function Watchlist() {
                     {movies.length === 0 ? (
                         <p>No movies in watchlist</p>
                     ) : (
-                        movies.map(item => (
+                        movies.map(movie => (
                             <MovieCard
-                                key={item.id}
-                                movie={item.movie}   // IMPORTANT
+                                key={movie.id}
+                                movie={movie.movie}
                                 showRemove
-                                onRemove={() => removeFromWatchlist(item.movie.id)}
+                                onRemove={() => removeFromWatchlist(movie.movie.id)}
                             />
                         ))
                     )}

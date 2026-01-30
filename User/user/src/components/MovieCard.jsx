@@ -4,7 +4,7 @@ function MovieCard({ movie }) {
     return (
         <Link to={`/movie/${movie.id}`} className="movie-card">
             <img
-                src={movie.banner_url}
+                src={movie.thumbnail}
                 alt={movie.title}
             />
             <div className="movie-title-overlay">

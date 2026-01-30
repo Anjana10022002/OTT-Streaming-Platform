@@ -1,96 +1,96 @@
-// import React, { useEffect, useState } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
-// import BackButton from "../components/BackButton";
-// import axios from "axios";
-
-// function MovieDetails() {
-//     const { id } = useParams();
-//     const [movie, setMovie] = useState(null);
-
-//     useEffect(() => {
-//         axios.get(`http://127.0.0.1:8000/userapi/movieID/${id}/`, {
-//             headers: {
-//                 Authorization: `Token ${localStorage.getItem("token")}`,
-//             },
-//         })
-//         .then(res => setMovie(res.data))
-//         .catch(err => console.error(err));
-//     }, [id]);
-
-//     if (!movie) return null;
-
-//     return (
-//         <div className="container">
-//             <BackButton />
-//             <div className="movie-details-page">
-//                 <img src={movie.thumbnail} alt={movie.title} />
-//                 <h2>{movie.title}</h2>
-//                 <p>{movie.description}</p>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default MovieDetails;
-
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 
 function MovieDetails() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [movie, setMovie] = useState(null);
-    const [message, setMessage] = useState("");
+    const token = localStorage.getItem("token");
 
+    // 🔹 Fetch movie details
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/userapi/movieID/${id}/`, {
             headers: {
-                Authorization: `Token ${localStorage.getItem("token")}`,
+                Authorization: `Token ${token}`,
             },
         })
-        
-        .then(res => setMovie(res.data))
-        .catch(err => console.error(err));
+        .then(res => {
+            setMovie(res.data);
+        })
+        .catch(err => {
+            console.error("Error fetching movie:", err);
+        });
     }, [id]);
 
+    // 🔹 Add to watchlist
     function addToWatchlist() {
-        console.log("Adding to watchlist:", id);
         axios.post(
             "http://127.0.0.1:8000/userapi/watchlist/add/",
             { movie_id: id },
             {
                 headers: {
-                    Authorization: `Token ${localStorage.getItem("token")}`,
+                    Authorization: `Token ${token}`,
                 },
             }
         )
-        .then(() => setMessage("Added to watchlist"))
-        .catch(() => setMessage("Already in watchlist"));
+        .then(res => {
+            alert(res.data.message);
+        })
+        .catch(err => {
+            console.error("Watchlist error:", err);
+        });
+    }
+
+    function playMovie() {
+        axios.post(
+            "http://127.0.0.1:8000/userapi/history/add/",
+            { movie_id: id },
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            }
+        )
+        .then(() => {
+            navigate(`/watch/${id}`);
+        })
+        .catch(err => {
+            console.error("History error:", err);
+        });
     }
 
     if (!movie) {
-        return <div className="container">Loading...</div>;
+        return <p>Loading...</p>;
     }
 
     return (
-        <div className="movie-detail-container">
+        <div className="container">
             <BackButton />
 
-            <div
-                className="movie-hero"
-                style={{
-                    backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.4)), url(${movie.thumbnail})`
-                }}
-            >
-                <div className="movie-hero-content">
-                    <h1>{movie.title}</h1>
-                    <p className="movie-description">{movie.description}</p>
+            <div className="movie-details-page">
+                <div className="movie-poster">
+                    <img
+                        src={movie.thumbnail}
+                        alt={movie.title}
+                        height={450}
+                    />
+                </div>
+
+                <div className="movie-info">
+                    <h2>{movie.title}</h2>
+
+                    <p className="movie-description">
+                        {movie.description}
+                    </p>
 
                     <div className="movie-actions">
-                        <button className="btn primary">
-                            ▶ Watch Now
+                        <button
+                            className="btn primary"
+                            onClick={playMovie}
+                        >
+                            ▶ Play
                         </button>
 
                         <button
@@ -100,8 +100,6 @@ function MovieDetails() {
                             + Add to Watchlist
                         </button>
                     </div>
-
-                    {message && <p className="status-msg">{message}</p>}
                 </div>
             </div>
         </div>
