@@ -74,38 +74,25 @@ def add_to_watchlist(request):
     movie_id = request.data.get("movie_id")
 
     if not movie_id:
-        return Response(
-            {"message": "movie_id is required"},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response({"message": "movie_id required"}, status=400)
 
-    try:
-        movie = Movie.objects.get(id=movie_id)
-    except Movie.DoesNotExist:
-        return Response(
-            {"message": "Movie not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
+    movie = Movie.objects.get(id=movie_id)
 
-    watchlist_item, created = watchlist.objects.get_or_create(
-        user_id=request.user,     # ✅ FIX
-        movie_id=movie            # ✅ FIX
+    watchlist.objects.get_or_create(
+        user_id=request.user,
+        movie_id=movie
     )
-
-    if not created:
-        return Response({"message": "Movie already in watchlist"})
 
     return Response({"message": "Movie added to watchlist"}, status=201)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def view_watchlist(request):
-    watchlist_items = watchlist.objects.filter(
-        user_id=request.user
-    ).select_related("movie_id")
+    items = watchlist.objects.filter(user_id=request.user)
 
-    movies = [item.movie_id for item in watchlist_items]
+    movies = [item.movie_id for item in items]
     serializer = MovieSerializer(movies, many=True)
+
     return Response(serializer.data)
 
 
@@ -135,35 +122,19 @@ def view_history(request, user_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
+@permission_classes([IsAuthenticated])
 def add_history(request):
-    user_id = request.data.get("user_id")
     movie_id = request.data.get("movie_id")
 
-    if not user_id or not movie_id:
-        return Response(
-            {"message": "user_id and movie_id are required"},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    try:
-        user = User.objects.get(id=user_id)
-        movie = Movie.objects.get(id=movie_id)
-    except (User.DoesNotExist, Movie.DoesNotExist):
-        return Response(
-            {"message": "User or Movie not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
+    movie = Movie.objects.get(id=movie_id)
 
     WatchHistory.objects.create(
-        user_id=user,
+        user_id=request.user,
         movie_id=movie
     )
 
-    return Response(
-        {"message": "Movie added to watch history"},
-        status=status.HTTP_201_CREATED
-    )
+    return Response({"message": "Added to history"}, status=201)
+
 
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))

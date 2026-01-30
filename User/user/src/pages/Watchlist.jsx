@@ -8,10 +8,8 @@ function Watchlist() {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        fetchWatchlist();
-    }, []);
+        if (!token) return;
 
-    function fetchWatchlist() {
         axios.get("http://127.0.0.1:8000/userapi/watchlist/", {
             headers: {
                 Authorization: `Token ${token}`,
@@ -21,34 +19,13 @@ function Watchlist() {
             setMovies(res.data);
         })
         .catch(err => console.error(err));
-    }
-
-    function removeFromWatchlist(movieId) {
-        axios.post(
-            "http://127.0.0.1:8000/userapi/watchlist/remove/",
-            { movie_id: movieId },
-            {
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            }
-        )
-        .then(() => {
-            fetchWatchlist();
-        })
-        .catch(err => console.error(err));
-    }
+    }, []);
 
     return (
         <>
             <Navbar />
             <div className="container">
-                <div className="page-header">
-                    <h2>Your Watchlist</h2>
-                    <p className="page-subtitle">
-                        Movies and shows you've saved to watch later
-                    </p>
-                </div>
+                <h2>Your Watchlist</h2>
 
                 <div className="movie-grid">
                     {movies.length === 0 ? (
@@ -57,9 +34,7 @@ function Watchlist() {
                         movies.map(movie => (
                             <MovieCard
                                 key={movie.id}
-                                movie={movie.movie}
-                                showRemove
-                                onRemove={() => removeFromWatchlist(movie.movie.id)}
+                                movie={movie}
                             />
                         ))
                     )}
