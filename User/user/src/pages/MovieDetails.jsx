@@ -50,6 +50,7 @@ function MovieDetails() {
                 Authorization: `Token ${localStorage.getItem("token")}`,
             },
         })
+        
         .then(res => setMovie(res.data))
         .catch(err => console.error(err));
     }, [id]);
