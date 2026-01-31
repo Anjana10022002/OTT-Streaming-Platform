@@ -9,7 +9,6 @@ function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const token = localStorage.getItem("token");
 
-    // 🔹 Fetch movie details
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/userapi/movieID/${id}/`, {
             headers: {
@@ -24,7 +23,6 @@ function MovieDetails() {
         });
     }, [id]);
 
-    // 🔹 Add to watchlist
     function addToWatchlist() {
         axios.post(
             "http://127.0.0.1:8000/userapi/watchlist/add/",
@@ -59,6 +57,20 @@ function MovieDetails() {
         .catch(err => {
             console.error("History error:", err);
         });
+    }
+
+    function addToWatchlist() {
+        axios.post(
+            "http://127.0.0.1:8000/userapi/watchlist/add/",
+            { movie_id: id },
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            }
+        )
+        .then(res => alert(res.data.message))
+        .catch(err => console.error(err));
     }
 
     if (!movie) {
