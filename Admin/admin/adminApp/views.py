@@ -3,10 +3,6 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout 
 
-# def login_page(request):
-#     return render(request, './login.html')
-# def home_page(request):
-#     return render(request, './home.html')
 def movielist_page(request):
     return render(request, './movielist.html')
 def userlist_page(request):
@@ -17,8 +13,6 @@ def movieview_page(request):
     return render(request, './movieview.html')
 def change_password(request):
     return render(request, './passwordchange.html')
-# def logout_view(request):
-#     redirect('login')
 def add_movie(request):
     return render(request, './addmovie.html')
 
