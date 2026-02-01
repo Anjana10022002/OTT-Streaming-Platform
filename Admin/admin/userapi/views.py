@@ -182,20 +182,7 @@ def change_password(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def search_movies(request):
-    query = request.GET.get('q', '')
-    genre = request.GET.get('genre', '')
-    year = request.GET.get('year', '')
-
-    movies = Movie.objects.all()
-
-    if query:
-        movies = movies.filter(title__icontains=query)
-
-    if genre:
-        movies = movies.filter(genre__iexact=genre)
-
-    if year:
-        movies = movies.filter(year=year)
-
+    q = request.GET.get("q", "")
+    movies = Movie.objects.filter(title__icontains=q)
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)

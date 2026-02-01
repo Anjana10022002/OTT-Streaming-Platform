@@ -6,8 +6,11 @@ import BackButton from "../components/BackButton";
 function MovieDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [movie, setMovie] = useState(null);
     const token = localStorage.getItem("token");
+
+    const [movie, setMovie] = useState(null);
+    const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState("");
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/userapi/movieID/${id}/`, {
@@ -15,13 +18,9 @@ function MovieDetails() {
                 Authorization: `Token ${token}`,
             },
         })
-        .then(res => {
-            setMovie(res.data);
-        })
-        .catch(err => {
-            console.error("Error fetching movie:", err);
-        });
-    }, [id]);
+        .then(res => setMovie(res.data))
+        .catch(err => console.error("Error fetching movie:", err));
+    }, [id, token]);
 
     function addToWatchlist() {
         axios.post(
@@ -34,10 +33,13 @@ function MovieDetails() {
             }
         )
         .then(res => {
-            alert(res.data.message);
+            setMessage(res.data.message);
+            setMessageType("success");
         })
         .catch(err => {
-            console.error("Watchlist error:", err);
+            setMessage("Failed to add to watchlist");
+            setMessageType("error");
+            console.error(err);
         });
     }
 
@@ -51,31 +53,11 @@ function MovieDetails() {
                 },
             }
         )
-        .then(() => {
-            navigate(`/watch/${id}`);
-        })
-        .catch(err => {
-            console.error("History error:", err);
-        });
+        .then(() => navigate(`/watch/${id}`))
+        .catch(err => console.error("History error:", err));
     }
 
-    function addToWatchlist() {
-        axios.post(
-            "http://127.0.0.1:8000/userapi/watchlist/add/",
-            { movie_id: id },
-            {
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            }
-        )
-        .then(res => alert(res.data.message))
-        .catch(err => console.error(err));
-    }
-
-    if (!movie) {
-        return <p>Loading...</p>;
-    }
+    if (!movie) return <p>Loading...</p>;
 
     return (
         <div className="container">
@@ -83,12 +65,14 @@ function MovieDetails() {
 
             <div className="movie-details-page">
                 <div className="movie-poster">
-                    <img
-                        src={movie.thumbnail}
-                        alt={movie.title}
-                        height={450}
-                    />
+                    <img src={movie.thumbnail} alt={movie.title} height={450} />
                 </div>
+
+                {message && (
+                    <div className={`message ${messageType}`}>
+                        {message}
+                    </div>
+                )}
 
                 <div className="movie-info">
                     <h2>{movie.title}</h2>
@@ -98,17 +82,11 @@ function MovieDetails() {
                     </p>
 
                     <div className="movie-actions">
-                        <button
-                            className="btn primary"
-                            onClick={playMovie}
-                        >
+                        <button className="btn primary" onClick={playMovie}>
                             ▶ Play
                         </button>
 
-                        <button
-                            className="btn secondary"
-                            onClick={addToWatchlist}
-                        >
+                        <button className="btn secondary" onClick={addToWatchlist}>
                             + Add to Watchlist
                         </button>
                     </div>
