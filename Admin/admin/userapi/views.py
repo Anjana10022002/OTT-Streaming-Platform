@@ -112,15 +112,22 @@ def remove_from_watchlist(request):
     return Response({"message": "Removed from watchlist"})
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
-def view_history(request, user_id):
-    history = WatchHistory.objects.filter(
-        user_id_id=user_id
-    ).select_related("movie_id").order_by("-watched_on")
+@permission_classes([IsAuthenticated])
+def view_history(request):
+    history = (
+        WatchHistory.objects
+        .filter(user_id=request.user)
+        .order_by("-watched_on")
+    )
 
-    movies = [item.movie_id for item in history]
+    movie_map = {}
+    for item in history:
+        movie_map[item.movie_id.id] = item.movie_id
+
+    movies = list(movie_map.values())
     serializer = MovieSerializer(movies, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
