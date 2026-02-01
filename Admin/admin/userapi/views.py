@@ -95,21 +95,21 @@ def view_watchlist(request):
 
     return Response(serializer.data)
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def remove_from_watchlist(request):
     movie_id = request.data.get("movie_id")
 
-    try:
-        watchlist.objects.get(
-            user_id=request.user,
-            movie_id_id=movie_id
-        ).delete()
-    except watchlist.DoesNotExist:
-        return Response({"message": "Not in watchlist"}, status=404)
+    if not movie_id:
+        return Response({"message": "movie_id required"}, status=400)
 
-    return Response({"message": "Removed from watchlist"})
+    watchlist.objects.filter(
+        user_id=request.user,
+        movie_id_id=movie_id
+    ).delete()
+
+    return Response({"message": "Removed from watchlist"}, status=200)
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
