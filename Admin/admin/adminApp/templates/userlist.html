@@ -24,10 +24,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    
+            {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{% url 'user_history' user.id %}" class="action-btn">
+                        View History
+                    </a>
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'delete_user' user.id %}">
+                        {% csrf_token %}
+                        <button class="danger-btn"
+                            onclick="return confirm('Delete this user?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No users found</td>
+            </tr>
+            {% endfor %}
+            </tbody>
 
-                </tr>
         </table>
     </main> 
     </div> 

@@ -28,7 +28,10 @@ urlpatterns = [
     path('chagepassword/', views.change_password, name='changepassword'),
     path('addmovie/', views.add_movie, name='addmovie'),
     path('logout/', views.admin_logout, name='admin_logout'),
-    
+    path("movie/delete/<int:movie_id>/", views.delete_movie, name="delete_movie"),
+    path("user/history/<int:user_id>/", views.user_history, name="user_history"),
+
+
 ]
 
 urlpatterns += [
