@@ -85,3 +85,27 @@ def user_history(request, user_id):
     return render(request, "userhistory.html", {
         "history": history
     })
+
+@login_required(login_url="admin_login")
+def add_movie(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        thumbnail = request.FILES.get("thumbnail")
+        video_file = request.FILES.get("video_file")
+
+        if not all([title, description, thumbnail, video_file]):
+            messages.error(request, "All fields are required")
+            return render(request, "addmovie.html")
+
+        Movie.objects.create(
+            title=title,  
+            description=description,
+            thumbnail=thumbnail,
+            video_file=video_file
+        )
+
+        messages.success(request, "Movie added successfully")
+        return redirect("movielist")
+
+    return render(request, "addmovie.html")
