@@ -30,6 +30,7 @@ urlpatterns = [
     path('logout/', views.admin_logout, name='admin_logout'),
     path("movie/delete/<int:movie_id>/", views.delete_movie, name="delete_movie"),
     path("user/history/<int:user_id>/", views.user_history, name="user_history"),
+    path("user/toggle/<int:user_id>/", views.toggle_user_status, name="toggle_user"),
 
 
 ]

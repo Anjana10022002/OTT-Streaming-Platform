@@ -6,6 +6,7 @@ from .models import User, Movie, WatchHistory
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout 
+from django.shortcuts import get_object_or_404
 
 # def movielist_page(request):
 #     return render(request, './movielist.html')
@@ -56,17 +57,31 @@ def delete_movie(request, movie_id):
 
 @login_required(login_url="admin_login")
 def userlist_page(request):
-    users = User.objects.filter(is_admin=False).order_by("-id")
-    return render(request, "userlist.html", {"users": users})
+    query = request.GET.get("q", "")
+
+    users = User.objects.filter(is_admin=False)
+
+    if query:
+        users = users.filter(email__icontains=query)
+
+    return render(request, "userlist.html", {
+        "users": users,
+        "query": query
+    })
 
 @login_required(login_url="admin_login")
-def delete_movie(request, movie_id):
-    if request.method == "POST":
-        Movie.objects.filter(id=movie_id).delete()
-    return redirect("movielist")
-
+def toggle_user_status(request, user_id):
+    user = User.objects.get(id=user_id, is_admin=False)
+    user.is_active = not user.is_active
+    user.save()
+    return redirect("userlist")
 
 @login_required(login_url="admin_login")
 def user_history(request, user_id):
-    history = WatchHistory.objects.filter(user_id=user_id).select_related("movie_id")
-    return render(request, "userhistory.html", {"history": history})
+    history = WatchHistory.objects.filter(
+        user_id=user_id
+    ).select_related("movie_id")
+
+    return render(request, "userhistory.html", {
+        "history": history
+    })

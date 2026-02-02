@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+</head>
+<body>
+    <h2>User Watch History</h2>
+
+    <table>
+    <tr>
+        <th>Movie</th>
+        <th>Watched On</th>
+    </tr>
+
+    {% for item in history %}
+    <tr>
+        <td>{{ item.movie_id.title }}</td>
+        <td>{{ item.watched_on }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">No history found</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+</body>
+</html>
