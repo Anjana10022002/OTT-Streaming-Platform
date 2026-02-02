@@ -26,6 +26,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for row in reports %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ row.movie_id__title }}</td>
+                    <td>{{ row.total_views }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No data available</td>
+                </tr>
+                {% endfor %}
+                </tbody>
             </table>
         </main>
     </div>

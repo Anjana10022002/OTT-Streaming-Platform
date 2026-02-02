@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout 
 from django.shortcuts import get_object_or_404
+from django.db.models import Count
+
 
 # def movielist_page(request):
 #     return render(request, './movielist.html')
@@ -109,3 +111,16 @@ def add_movie(request):
         return redirect("movielist")
 
     return render(request, "addmovie.html")
+
+@login_required(login_url="admin_login")
+def report_page(request):
+    reports = (
+        WatchHistory.objects
+        .values("movie_id__title")
+        .annotate(total_views=Count("id"))
+        .order_by("-total_views")
+    )
+
+    return render(request, "report.html", {
+        "reports": reports
+    })
