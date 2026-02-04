@@ -23,7 +23,7 @@ function MovieCard({ movie, showRemove, onRemove }) {
     return (
         <div className="movie-card-wrapper">
             <Link to={`/movie/${movie.id}`} className="movie-card">
-                <img src={movie.thumbnail} alt={movie.title} />
+                <img src={`http://127.0.0.1:8000${movie.thumbnail}`} alt={movie.title} />
                 <div className="movie-title-overlay">
                     {movie.title}
                 </div>

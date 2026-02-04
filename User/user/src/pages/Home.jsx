@@ -158,6 +158,7 @@ function Home() {
         })
         .then((response) => {
             setMovies(response.data);
+            console.log("Fetched movies:", response.data);
         })
         .catch((error) => {
             console.error("Error fetching movies:", error);

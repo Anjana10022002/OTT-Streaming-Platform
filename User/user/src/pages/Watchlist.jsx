@@ -81,7 +81,7 @@ function Watchlist() {
             }
         )
         .then(() => {
-            fetchWatchlist(); // 🔄 refresh after delete
+            fetchWatchlist();
         })
         .catch(err => console.error(err));
     }
