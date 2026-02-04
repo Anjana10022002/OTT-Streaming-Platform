@@ -125,8 +125,22 @@ function Home() {
     const [movies, setMovies] = useState([]);
     const [searchText, setSearchText] = useState("");
     const navigate = useNavigate();
+    const [activeIndex, setActiveIndex] = useState(0);
+    const carouselMovies = movies.slice(0, 5);
+    const [featuredIndex, setFeaturedIndex] = useState(0);
 
-    /* ---------------- AUTH CHECK ---------------- */
+    useEffect(() => {
+        if (movies.length === 0) return;
+
+        const interval = setInterval(() => {
+            setFeaturedIndex(prev =>
+                prev >= movies.length - 1 ? 0 : prev + 1
+            );
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [movies]);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -136,7 +150,6 @@ function Home() {
         }
     }, []);
 
-    /* ---------------- FETCH ALL MOVIES ---------------- */
     function fetchMovies() {
         axios.get("http://127.0.0.1:8000/userapi/movieList/", {
             headers: {
@@ -151,10 +164,27 @@ function Home() {
         });
     }
 
-    /* ---------------- SEARCH MOVIES ---------------- */
+    function addToWatchlist(movieId) {
+    axios.post(
+        "http://127.0.0.1:8000/userapi/watchlist/add/",
+        { movie_id: movieId },
+        {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+        }
+    )
+    .then(res => {
+        alert(res.data.message); 
+    })
+    .catch(err => {
+        console.error("Watchlist error:", err);
+    });
+}
+
     function searchMovies() {
         if (!searchText.trim()) {
-            fetchMovies();   // reset to all movies
+            fetchMovies(); 
             return;
         }
 
@@ -177,26 +207,35 @@ function Home() {
     return (
         <>
             <Navbar />
+            
+            {movies.length > 0 && featuredIndex < movies.length && (
+                <section
+                    className="hero-carousel"
+                    style={{
+                        backgroundImage: `url(${movies[featuredIndex].thumbnail})`,
+                    }}
+                >
+                    <div className="hero-carousel-overlay"></div>
 
-            {/* -------- HERO (unchanged) -------- */}
-            <section className="hero-carousel">
-                <div className="hero-carousel-overlay"></div>
-                <div className="hero-carousel-content">
-                    <div className="hero-carousel-actions">
-                        <Link to="/movie/1" className="btn primary">
-                            ▶ Play Now
-                        </Link>
-                        <button className="btn secondary">
-                            + Add to Watchlist
-                        </button>
+                    <div className="hero-carousel-content">
+                        <h1>{movies[featuredIndex].title}</h1>
+                        <p>{movies[featuredIndex].description?.slice(0, 120)}...</p>
+
+                        <div className="hero-carousel-actions">
+                            <Link
+                                to={`/movie/${movies[featuredIndex].id}`}
+                                className="btn primary"
+                            >
+                                ▶ Play Now
+                            </Link>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
-            {/* -------- MAIN -------- */}
+
             <main className="container">
 
-                {/* SEARCH */}
                 <div className="home-header">
                     <div className="search-box">
                         <input
@@ -209,7 +248,6 @@ function Home() {
                     </div>
                 </div>
 
-                {/* MOVIE LIST */}
                 <section className="home-section">
                     <h3 className="section-title">Trending Now</h3>
 
