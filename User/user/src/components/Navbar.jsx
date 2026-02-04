@@ -7,7 +7,7 @@ function Navbar() {
 
     function handleLogout() {
         localStorage.removeItem("token");
-        localStorage.removeItem("email");   // if stored
+        localStorage.removeItem("email"); 
         setOpen(false);
         navigate("/login");
     }

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout 
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
-
+from django.contrib.auth import update_session_auth_hash
 
 # def movielist_page(request):
 #     return render(request, './movielist.html')
@@ -124,3 +124,28 @@ def report_page(request):
     return render(request, "report.html", {
         "reports": reports
     })
+
+
+@login_required(login_url="admin_login")
+def change_password(request):
+    if request.method == "POST":
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_password")
+
+        user = request.user
+
+        if not user.check_password(old_password):
+            messages.error(request, "Old password is incorrect")
+            return redirect("changepassword")
+        if new_password != confirm_password:
+            messages.error(request, "New passwords do not match")
+            return redirect("changepassword")
+        user.set_password(new_password)
+        user.save()
+        update_session_auth_hash(request, user)
+
+        messages.success(request, "Password changed successfully")
+        return redirect("admin_home")
+
+    return render(request, "passwordchange.html")
