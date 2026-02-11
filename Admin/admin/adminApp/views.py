@@ -95,6 +95,7 @@ def add_movie(request):
         description = request.POST.get("description")
         thumbnail = request.FILES.get("thumbnail")
         video_file = request.FILES.get("video_file")
+        banner = request.FILES.get("banner")
 
         if not all([title, description, thumbnail, video_file]):
             messages.error(request, "All fields are required")
@@ -104,7 +105,8 @@ def add_movie(request):
             title=title,  
             description=description,
             thumbnail=thumbnail,
-            video_file=video_file
+            video_file=video_file,
+            banner=banner
         )
 
         messages.success(request, "Movie added successfully")

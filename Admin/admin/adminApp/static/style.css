@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -24,13 +24,11 @@ button:focus {
     outline: none;
 }
 
-/* ================= GLOBAL BACKGROUND ================= */
 body {
     background: linear-gradient(180deg, #f8fafc, #eef2f7);
     color: #1f2937;
 }
 
-/* ================= ADMIN LAYOUT ================= */
 .admin-layout {
     display: flex;
     min-height: 100vh;
@@ -51,7 +49,6 @@ body {
     background: #1e40af;
 }
 
-/* ================= SIDEBAR ================= */
 .sidebar {
     width: 240px;
     background: #0f172a;
@@ -68,7 +65,6 @@ body {
     margin-bottom: 32px;
 }
 
-/* Sidebar menu */
 .sidebar-menu a {
     display: block;
     padding: 12px 14px;
@@ -85,7 +81,6 @@ body {
     color: #ffffff;
 }
 
-/* Sidebar footer */
 .sidebar-footer {
     margin-top: auto;
     padding-top: 16px;
@@ -107,7 +102,6 @@ body {
     margin-top: 10px;
 }
 
-/* remove form card styling ONLY for logout */
 .logout-form {
     background: none;
     padding: 0;
@@ -148,7 +142,6 @@ body {
 }
 
 
-/* ================= TABLES ================= */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -186,7 +179,6 @@ tbody tr:hover {
     background: #f8fafc;
 }
 
-/* ================= FORMS ================= */
 form {
     background: #ffffff;
     padding: 36px;
@@ -229,7 +221,6 @@ form button:hover {
     background: #1e40af;
 }
 
-/* ================= LOGIN PAGE ================= */
 body.login-page {
     background: linear-gradient(180deg, #f8fafc, #eef2f7);
 }
@@ -251,7 +242,6 @@ body.login-page {
     margin-bottom: 24px;
 }
 
-/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
     .sidebar {
         width: 200px;

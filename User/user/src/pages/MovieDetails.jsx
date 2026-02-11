@@ -65,7 +65,7 @@ function MovieDetails() {
 
             <div className="movie-details-page">
                 <div className="movie-poster">
-                    <img src={movie.thumbnail} alt={movie.title} height={450} />
+                    <img src={`http://127.0.0.1:8000${movie.thumbnail}`} alt={movie.title} height={450} />
                 </div>
 
                 {message && (

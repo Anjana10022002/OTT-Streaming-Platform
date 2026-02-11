@@ -31,7 +31,8 @@ class Movie(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     video_file = models.FileField(upload_to='videos/')
-    count = models.IntegerField(default=0)    
+    count = models.IntegerField(default=0) 
+    banner = models.FileField(upload_to='banners/', null=True, blank=True)  
 
 class watchlist(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -14,7 +14,6 @@ urlpatterns = [
     path('history/add/', views.add_history, name='add_history_api'),
     path('changePassword/', views.change_password, name='change_password_api'),
     path('movie/search/', views.search_movies, name ='search_movies')
-
 ]
 
 

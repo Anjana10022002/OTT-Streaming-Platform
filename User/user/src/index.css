@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --bg-main: #0b0f1a;
     --bg-surface: #111827;
     --bg-card: #1f2937;
@@ -221,7 +221,6 @@ input:focus {
     object-fit: cover;
 }
 
-/* Dark cinematic overlay */
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -231,7 +230,6 @@ input:focus {
     );
 }
 
-/* Centered content */
 .hero-content {
     position: relative;
     z-index: 2;
@@ -262,7 +260,6 @@ input:focus {
     gap: 18px;
 }
 
-/* Buttons */
 .btn.primary {
     background-color: var(--primary);
     padding: 14px 32px;
@@ -274,7 +271,6 @@ input:focus {
     padding: 14px 32px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: 32px;
@@ -452,13 +448,19 @@ input:focus {
 
 .hero-carousel {
     position: relative;
-    height: 65vh;
-    min-height: 420px;
+    height: 70vh;              
     width: 100%;
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 18px;
-    margin-bottom: 40px;
+
+    background-size: cover;    
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
 }
+
 
 .hero-carousel-bg {
     position: absolute;
@@ -473,39 +475,35 @@ input:focus {
     inset: 0;
     background: linear-gradient(
         to right,
-        rgba(0,0,0,0.85),
-        rgba(0,0,0,0.4),
-        rgba(0,0,0,0.2)
+        rgba(0,0,0,0.85) 20%,
+        rgba(0,0,0,0.5) 50%,
+        rgba(0,0,0,0.2) 80%
     );
 }
 
 .hero-carousel-content {
     position: relative;
     z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 60px;
     max-width: 600px;
+    padding-left: 60px;
 }
 
 .hero-carousel-content h1 {
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 12px;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .hero-carousel-content p {
-    font-size: 16px;
-    color: var(--text-muted);
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 25px;
     line-height: 1.6;
-    margin-bottom: 24px;
 }
 
-.hero-carousel-actions {
-    display: flex;
-    gap: 14px;
+.hero-carousel-actions .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -524,8 +522,20 @@ input:focus {
 }
 
 .hero-carousel {
-    margin-bottom: 48px;
+    position: relative;
+    height: 70vh;              
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+
+    background-size: cover;    
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
 }
+
 
 .home-header {
     display: flex;
@@ -608,4 +618,317 @@ input:focus {
 .status-msg {
     margin-top: 15px;
     color: #0f0;
+} */
+
+
+:root {
+    --bg-main: #0b0f1a;
+    --bg-surface: #111827;
+    --bg-card: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --primary: #e50914;
+    --border-soft: rgba(255,255,255,0.08);
+}
+
+/* ================= GLOBAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding: 24px;
+}
+
+/* ================= BUTTONS ================= */
+
+button {
+    height: 46px;
+    padding: 0 22px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn.primary {
+    background-color: var(--primary);
+    padding: 12px 24px;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-soft);
+    padding: 12px 24px;
+}
+
+/* ================= INPUT ================= */
+
+input {
+    height: 46px;
+    padding: 0 14px;
+    background-color: #0b1220;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background: linear-gradient(180deg, #0b0f1a, #0f172a);
+    border-bottom: 1px solid var(--border-soft);
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-inner {
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 28px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--text-main);
+}
+
+/* ================= PROFILE ================= */
+
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-btn {
+    background-color: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-soft);
+    padding: 8px 14px;
+    font-size: 14px;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 180px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.55);
+    z-index: 1000;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+/* ================= HOME HEADER ================= */
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+.home-header .search-box {
+    width: 360px;
+}
+
+/* ================= MOVIE GRID ================= */
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 22px;
+}
+
+/* ================= MOVIE CARD ================= */
+
+.movie-card {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 280px;   /* slightly taller */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ================= HERO CAROUSEL ================= */
+
+.hero-carousel {
+    position: relative;
+    height: 70vh;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+}
+
+/* Cinematic overlay */
+.hero-carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.85) 20%,
+        rgba(0,0,0,0.55) 50%,
+        rgba(0,0,0,0.2) 80%
+    );
+}
+
+.hero-carousel-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding-left: 60px;
+}
+
+.hero-carousel-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-carousel-content p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* ================= MOVIE DETAILS ================= */
+
+.movie-details-page {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 34px;
+}
+
+.movie-description {
+    max-width: 720px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 26px;
+}
+
+/* ================= VIDEO ================= */
+
+.video-player {
+    width: 100%;
+    height: 520px;
+    background-color: black;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1200px) {
+    .movie-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .movie-details-page {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-carousel {
+        height: 55vh;
+        border-radius: 0;
+    }
+
+    .hero-carousel-content {
+        padding: 0 24px;
+    }
+
+    .hero-carousel-content h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
 }

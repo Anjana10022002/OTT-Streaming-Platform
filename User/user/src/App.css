@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -101,15 +101,17 @@ button:focus-visible {
 }
 
 .hero-carousel {
-    position: relative;
     height: 70vh;
-    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .hero-slide {
     position: absolute;
     inset: 0;
     background-size: cover;
+
     background-position: center;
     opacity: 0;
     transition: opacity 1s ease-in-out;
@@ -132,4 +134,4 @@ button:focus-visible {
     left: 8%;
     color: white;
     max-width: 600px;
-}
+} */

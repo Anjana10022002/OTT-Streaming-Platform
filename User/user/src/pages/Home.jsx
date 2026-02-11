@@ -213,9 +213,12 @@ function Home() {
                 <section
                     className="hero-carousel"
                     style={{
-                        backgroundImage: `url(${movies[featuredIndex].thumbnail})`,
+                        backgroundImage: `url(http://127.0.0.1:8000${movies[featuredIndex].thumbnail})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
                     }}
                 >
+
                     <div className="hero-carousel-overlay"></div>
 
                     <div className="hero-carousel-content">
