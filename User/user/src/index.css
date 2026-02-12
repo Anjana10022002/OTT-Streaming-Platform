@@ -714,29 +714,20 @@ input::placeholder {
 
 
 :root {
-    /* Modern Purple + Gold Accent - Premium OTT Theme */
-    --bg-main: #0a0718;        /* Deep purple-black */
-    --bg-surface: #120e1f;      /* Rich dark purple */
-    --bg-card: #1e1a2b;         /* Medium purple */
-    --text-main: #ffffff;       /* Pure white */
-    --text-muted: #b8b1d1;      /* Soft lavender */
-    --primary: #8b5cf6;         /* Vibrant purple */
-    --primary-hover: #a78bfa;   /* Soft purple */
-    --border-soft: rgba(139,92,246,0.2); /* Purple tinted border */
-    --accent: #fbbf24;          /* Warm gold */
-    --accent-hover: #fcd34d;    /* Light gold */
-    --success: #10b981;         /* Emerald */
-    --warning: #f59e0b;         /* Amber */
-    --error: #ef4444;           /* Red */
-    --gradient-hero: linear-gradient(
-        to right,
-        rgba(10,7,24,0.95) 0%,
-        rgba(30,26,43,0.8) 40%,
-        rgba(139,92,246,0.4) 100%
-    );
+    --bg-main: #0a0718;
+    --bg-surface: #120e1f;
+    --bg-card: #1e1a2b;
+    --text-main: #ffffff;
+    --text-muted: #b8b1d1;
+    --primary: #8b5cf6;
+    --primary-hover: #7c3aed;
+    --border-soft: rgba(139,92,246,0.15);
+    --accent: #fbbf24;
+    --accent-hover: #f59e0b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
 }
-
-/* ================= GLOBAL ================= */
 
 * {
     margin: 0;
@@ -762,8 +753,6 @@ a {
     padding: 24px 32px;
 }
 
-/* ================= BUTTONS ================= */
-
 button {
     height: 46px;
     padding: 0 24px;
@@ -778,17 +767,14 @@ button {
 }
 
 button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
     background-color: var(--primary-hover);
 }
 
 .btn.primary {
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
+    background-color: var(--primary);
     padding: 12px 28px;
     border-radius: 6px;
     font-weight: 600;
-    box-shadow: 0 8px 20px rgba(139,92,246,0.3);
 }
 
 .btn.secondary {
@@ -802,15 +788,6 @@ button:hover {
 .btn.secondary:hover {
     background-color: rgba(255,255,255,0.15);
 }
-
-/* Gold accent button - for special actions */
-.btn.gold {
-    background: linear-gradient(145deg, var(--accent), var(--accent-hover));
-    color: #000;
-    font-weight: 700;
-}
-
-/* ================= INPUT ================= */
 
 input {
     width: 100%;
@@ -828,14 +805,11 @@ input:focus {
     outline: none;
     border-color: var(--primary);
     background-color: #24203a;
-    box-shadow: 0 0 0 3px rgba(139,92,246,0.1);
 }
 
 input::placeholder {
-    color: #9ca3af;
+    color: #6b7280;
 }
-
-/* ================= NAVBAR ================= */
 
 .navbar {
     background: linear-gradient(180deg, #0a0718, #120e1f);
@@ -863,7 +837,6 @@ input::placeholder {
     font-weight: 700;
     color: var(--primary);
     letter-spacing: -0.5px;
-    text-shadow: 0 0 20px rgba(139,92,246,0.5);
 }
 
 .nav-links {
@@ -877,7 +850,6 @@ input::placeholder {
     font-weight: 500;
     color: var(--text-muted);
     transition: color 0.2s ease;
-    position: relative;
 }
 
 .nav-links a:hover {
@@ -892,17 +864,15 @@ input::placeholder {
     bottom: -10px;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
+    background-color: var(--primary);
 }
-
-/* ================= PROFILE ================= */
 
 .profile-wrapper {
     position: relative;
 }
 
 .profile-btn {
-    background: rgba(139,92,246,0.1);
+    background-color: rgba(139,92,246,0.1);
     border: 1px solid var(--border-soft);
     border-radius: 8px;
     padding: 10px 18px;
@@ -913,12 +883,10 @@ input::placeholder {
     align-items: center;
     gap: 8px;
     height: 44px;
-    transition: all 0.2s ease;
 }
 
 .profile-btn:hover {
-    background: rgba(139,92,246,0.2);
-    border-color: var(--primary);
+    background-color: rgba(139,92,246,0.2);
 }
 
 .profile-dropdown {
@@ -926,10 +894,10 @@ input::placeholder {
     right: 0;
     top: 52px;
     width: 200px;
-    background: linear-gradient(145deg, #1e1a2b, #1a1627);
+    background-color: #1e1a2b;
     border: 1px solid var(--border-soft);
     border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     overflow: hidden;
     z-index: 1000;
 }
@@ -945,26 +913,17 @@ input::placeholder {
     border: none;
     text-align: left;
     height: auto;
-    transition: all 0.2s ease;
 }
 
 .profile-dropdown a:hover,
 .profile-dropdown button:hover {
-    background: rgba(139,92,246,0.15);
-    color: var(--primary-hover);
+    background-color: rgba(139,92,246,0.15);
 }
 
 .logout-btn {
     color: #ef4444 !important;
     border-top: 1px solid var(--border-soft);
 }
-
-.logout-btn:hover {
-    background: rgba(239,68,68,0.1) !important;
-    color: #ef4444 !important;
-}
-
-/* ================= LANDING PAGE HERO ================= */
 
 .hero {
     position: relative;
@@ -980,7 +939,7 @@ input::placeholder {
     height: 100%;
     object-fit: cover;
     transform: scale(1.02);
-    filter: brightness(0.6);
+    filter: brightness(0.7);
 }
 
 .hero-overlay {
@@ -988,8 +947,8 @@ input::placeholder {
     inset: 0;
     background: radial-gradient(
         circle at center,
-        rgba(139,92,246,0.2) 0%,
-        rgba(10,7,24,0.9) 100%
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0.8) 100%
     );
 }
 
@@ -1013,10 +972,7 @@ input::placeholder {
     margin-bottom: 20px;
     line-height: 1.2;
     letter-spacing: -1px;
-    text-shadow: 0 4px 20px rgba(139,92,246,0.5);
-    background: linear-gradient(135deg, #ffffff, #e0e7ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-main);
 }
 
 .hero-content p {
@@ -1024,7 +980,6 @@ input::placeholder {
     color: #e5e7eb;
     margin-bottom: 40px;
     font-weight: 400;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .hero-actions {
@@ -1037,18 +992,6 @@ input::placeholder {
     font-size: 18px;
     border-radius: 8px;
 }
-
-.hero-actions .btn.primary {
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
-}
-
-.hero-actions .btn.secondary {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-soft);
-}
-
-/* ================= HOME HEADER & SEARCH ================= */
 
 .home-header {
     display: flex;
@@ -1073,14 +1016,8 @@ input::placeholder {
     width: 100px;
     height: 48px;
     border-radius: 8px;
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
+    background-color: var(--primary);
 }
-
-.search-box button:hover {
-    background: linear-gradient(145deg, var(--primary-hover), var(--primary));
-}
-
-/* ================= HERO CAROUSEL / BANNER ================= */
 
 .hero-carousel {
     position: relative;
@@ -1092,7 +1029,7 @@ input::placeholder {
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    box-shadow: 0 20px 40px rgba(139,92,246,0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 .hero-carousel-overlay {
@@ -1100,9 +1037,9 @@ input::placeholder {
     inset: 0;
     background: linear-gradient(
         to right,
-        rgba(10,7,24,0.95) 0%,
-        rgba(30,26,43,0.8) 40%,
-        rgba(139,92,246,0.3) 100%
+        rgba(10,7,24,0.9) 0%,
+        rgba(30,26,43,0.7) 40%,
+        rgba(0,0,0,0.3) 100%
     );
 }
 
@@ -1123,7 +1060,6 @@ input::placeholder {
     margin-bottom: 16px;
     line-height: 1.2;
     letter-spacing: -0.5px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
     color: var(--text-main);
 }
 
@@ -1132,7 +1068,6 @@ input::placeholder {
     color: #e0e0e0;
     margin-bottom: 28px;
     line-height: 1.6;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -1150,15 +1085,6 @@ input::placeholder {
     font-weight: 600;
 }
 
-.hero-carousel-actions .btn.primary {
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
-}
-
-.hero-carousel-actions .btn.secondary {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-}
-
 .hero-carousel-fallback {
     position: relative;
     height: 600px;
@@ -1166,7 +1092,7 @@ input::placeholder {
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 48px;
-    box-shadow: 0 20px 40px rgba(139,92,246,0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 .hero-carousel-fallback img {
@@ -1182,15 +1108,11 @@ input::placeholder {
     z-index: 3;
 }
 
-/* ================= MOVIE GRID ================= */
-
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 24px;
 }
-
-/* ================= MOVIE CARD (THUMBNAIL FIX) ================= */
 
 .movie-card-wrapper {
     position: relative;
@@ -1205,8 +1127,7 @@ input::placeholder {
     border-radius: 12px;
     overflow: hidden;
     aspect-ratio: 2/3;
-    background: linear-gradient(145deg, #1e1a2b, #1a1627);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    background-color: #1e1a2b;
 }
 
 .movie-card img {
@@ -1232,7 +1153,6 @@ input::placeholder {
     font-weight: 600;
     opacity: 0;
     transition: opacity 0.3s ease;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 .movie-card:hover .movie-title-overlay {
@@ -1246,7 +1166,7 @@ input::placeholder {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.7);
     border: 1px solid var(--border-soft);
     color: white;
     display: flex;
@@ -1256,7 +1176,6 @@ input::placeholder {
     font-size: 16px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
 }
 
 .movie-card-wrapper:hover .remove-btn {
@@ -1264,11 +1183,8 @@ input::placeholder {
 }
 
 .remove-btn:hover {
-    background: #dc2626;
-    transform: none;
+    background-color: #dc2626;
 }
-
-/* ================= MOVIE DETAILS PAGE ================= */
 
 .movie-details-page {
     display: grid;
@@ -1280,7 +1196,7 @@ input::placeholder {
 .movie-poster {
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(139,92,246,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     aspect-ratio: 2/3;
 }
 
@@ -1301,9 +1217,7 @@ input::placeholder {
     margin-bottom: 20px;
     line-height: 1.2;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #ffffff, #e0e7ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-main);
 }
 
 .movie-description {
@@ -1324,12 +1238,6 @@ input::placeholder {
     font-size: 16px;
 }
 
-.movie-actions .btn.primary {
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
-}
-
-/* ================= AUTH PAGES ================= */
-
 .auth-page {
     min-height: 100vh;
     display: flex;
@@ -1346,7 +1254,7 @@ input::placeholder {
     max-width: 440px;
     border-radius: 24px;
     border: 1px solid var(--border-soft);
-    box-shadow: 0 25px 50px rgba(139,92,246,0.2);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
 .auth-card h2 {
@@ -1354,14 +1262,12 @@ input::placeholder {
     font-weight: 700;
     margin-bottom: 32px;
     text-align: center;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-main);
 }
 
 .auth-card input {
     margin-bottom: 20px;
-    background: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.3);
 }
 
 .auth-card button {
@@ -1369,7 +1275,7 @@ input::placeholder {
     height: 52px;
     margin-top: 16px;
     font-size: 16px;
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
+    background-color: var(--primary);
 }
 
 .auth-card p {
@@ -1382,11 +1288,6 @@ input::placeholder {
 .auth-card a {
     color: var(--primary);
     font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-.auth-card a:hover {
-    color: var(--accent);
 }
 
 .error-text,
@@ -1400,33 +1301,16 @@ input::placeholder {
     border-left: 3px solid #ef4444;
 }
 
-/* ================= SECTION TITLES ================= */
-
 .section-title {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
     color: var(--text-main);
     letter-spacing: -0.3px;
-    position: relative;
-    display: inline-block;
 }
-
-.section-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-radius: 2px;
-}
-
-/* ================= WATCH PAGE ================= */
 
 .watch-page {
-    background: radial-gradient(circle at center, #0a0718, #000000);
+    background-color: #0a0718;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -1437,14 +1321,10 @@ input::placeholder {
     width: 100%;
     max-height: 90vh;
     object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(139,92,246,0.3);
 }
 
-/* ================= BACK BUTTON ================= */
-
 .back-btn {
-    background: rgba(139,92,246,0.1);
+    background-color: rgba(139,92,246,0.1);
     border: 1px solid var(--border-soft);
     border-radius: 30px;
     padding: 10px 24px;
@@ -1455,16 +1335,11 @@ input::placeholder {
     gap: 8px;
     font-size: 15px;
     color: var(--text-main);
-    transition: all 0.2s ease;
 }
 
 .back-btn:hover {
-    background: rgba(139,92,246,0.2);
-    border-color: var(--primary);
-    transform: translateX(-2px);
+    background-color: rgba(139,92,246,0.2);
 }
-
-/* ================= RESPONSIVE ================= */
 
 @media (max-width: 1300px) {
     .movie-grid {
@@ -1570,26 +1445,4 @@ input::placeholder {
     .movie-info h2 {
         font-size: 32px;
     }
-}
-
-/* ================= UTILITY CLASSES ================= */
-
-.text-gradient {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.bg-gradient-purple {
-    background: linear-gradient(145deg, var(--primary), var(--primary-hover));
-}
-
-.bg-gradient-gold {
-    background: linear-gradient(145deg, var(--accent), var(--accent-hover));
-}
-
-.border-gradient {
-    border: 1px solid transparent;
-    border-image: linear-gradient(135deg, var(--primary), var(--accent));
-    border-image-slice: 1;
 }
