@@ -10,19 +10,6 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from django.contrib.auth import update_session_auth_hash
 
-# def movielist_page(request):
-#     return render(request, './movielist.html')
-# def userlist_page(request):
-#     return render(request, './userlist.html')
-def report_page(request):
-    return render(request, './report.html')
-def movieview_page(request):
-    return render(request, './movieview.html')
-def change_password(request):
-    return render(request, './passwordchange.html')
-def add_movie(request):
-    return render(request, './addmovie.html')
-
 def admin_login(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -90,29 +77,44 @@ def user_history(request, user_id):
 
 @login_required(login_url="admin_login")
 def add_movie(request):
+    movie_id = request.GET.get('edit')
+    movie = None
+    
+    if movie_id:
+        movie = Movie.objects.get(id=movie_id)
+    
     if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
         thumbnail = request.FILES.get("thumbnail")
         video_file = request.FILES.get("video_file")
         banner = request.FILES.get("banner")
-
-        if not all([title, description, thumbnail, video_file]):
-            messages.error(request, "All fields are required")
-            return render(request, "addmovie.html")
-
-        Movie.objects.create(
-            title=title,  
-            description=description,
-            thumbnail=thumbnail,
-            video_file=video_file,
-            banner=banner
-        )
-
-        messages.success(request, "Movie added successfully")
+        
+        if movie: 
+            movie.title = title
+            movie.description = description
+            if thumbnail:
+                movie.thumbnail = thumbnail
+            if video_file:
+                movie.video_file = video_file
+            if banner:
+                movie.banner = banner
+            movie.save()
+            messages.success(request, "Movie updated successfully")
+            
+        else:  
+            Movie.objects.create(
+                title=title,
+                description=description,
+                thumbnail=thumbnail,
+                video_file=video_file,
+                banner=banner
+            )
+            messages.success(request, "Movie added successfully")
+            
         return redirect("movielist")
 
-    return render(request, "addmovie.html")
+    return render(request, "addmovie.html", {"movie": movie})
 
 @login_required(login_url="admin_login")
 def report_page(request):
@@ -151,3 +153,7 @@ def change_password(request):
         return redirect("admin_home")
 
     return render(request, "passwordchange.html")
+
+def movieview(request, id):
+    movie = Movie.objects.get(id=id)
+    return render(request, 'movieview.html', {'movie': movie})

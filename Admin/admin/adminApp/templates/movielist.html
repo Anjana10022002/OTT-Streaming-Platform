@@ -32,14 +32,22 @@
                     {% for movie in movies %}
                     <tr>
                         <td>
-                            <img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}" width="80">
+                            <a href="{% url 'movieview' movie.id %}">
+                                <img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}" width="80">
+                            </a>
                         </td>
-                        <td>{{ movie.title }}</td>
-                        <td>{{ movie.description|truncatechars:60 }}</td>
                         <td>
-                            <a href="{% url 'movieview' %}?id={{ movie.id }}" class="action-btn">View</a>
+                            <a href="{% url 'movieview' movie.id %}">
+                                {{ movie.title }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'movieview' movie.id %}">
+                                {{ movie.description|truncatechars:60 }}
+                            </a>
+                        </td>
+                        <td>
                             <a href="{% url 'addmovie' %}?edit={{ movie.id }}" class="action-btn">Edit</a>
-
                             <form method="POST" action="{% url 'delete_movie' movie.id %}" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="danger-btn"

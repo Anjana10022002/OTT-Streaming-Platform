@@ -13,7 +13,7 @@
         {% include 'partials/navbar.html' %}
 
         <main class="main-content">
-            <h1>Add New Movie</h1>
+        <!-- <h1>Add New Movie</h1>
 
         <form method="post" enctype="multipart/form-data" class="movie-form">
             {% csrf_token %}
@@ -37,6 +37,37 @@
                 <button type="submit">Add Movie</button>
                 <a href="{% url 'movielist' %}" class="cancel-btn">Cancel</a>
             </div>
+        </form> -->
+
+        <h1>{% if movie %}Edit{% else %}Add{% endif %} Movie</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <label>Title:</label>
+            <input type="text" name="title" value="{{ movie.title|default:'' }}" required>
+            
+            <label>Description:</label>
+            <textarea name="description" required>{{ movie.description|default:'' }}</textarea>
+            
+            {% if movie and movie.thumbnail %}
+                <p>Current thumbnail:</p>
+                <img src="{{ movie.thumbnail.url }}" width="100">
+                <p>Replace?</p>
+            {% endif %}
+            <input type="file" name="thumbnail" accept="image/*" {% if not movie %}required{% endif %}>
+            
+            {% if movie and movie.video_file %}
+                <p>Current video: {{ movie.video_file.name }}</p>
+                <p>Replace?</p>
+            {% endif %}
+            <input type="file" name="video_file" accept="video/*" {% if not movie %}required{% endif %}>
+            
+            <label>Banner (optional):</label>
+            <input type="file" name="banner" accept="image/*">
+            
+            <button type="submit">{% if movie %}Update{% else %}Add{% endif %} Movie</button>
+            <a href="{% url 'movielist' %}">Cancel</a>
         </form>
 
         </main>

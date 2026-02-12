@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,5 +10,48 @@
 </head>
 <body>
     <h1>Movie view page</h1>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.title }} - Movie view</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'movieview.css' %}">
+</head>
+<body>
+    <div class="movie-detail-container">
+        <div class="banner-section">
+            <img src="{{ movie.banner.url }}" alt="{{ movie.title }}">
+        </div>
+        
+        <div class="content-section">
+            <div class="thumbnail-section">
+                <img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}">
+            </div>
+            
+            <div class="info-section">
+                <h1>{{ movie.title }}</h1>
+                
+                <div class="description-section">
+                    <h3>Description</h3>
+                    <p>{{ movie.description }}</p>
+                </div>
+                
+                <div class="video-section">
+                    <h3>Watch Now</h3>
+                    <video controls>
+                        <source src="{{ movie.video_file.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <a href="{% url 'movielist' %}" class="back-btn">Back to Movies</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
