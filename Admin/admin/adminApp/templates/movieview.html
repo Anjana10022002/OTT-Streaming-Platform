@@ -1,55 +1,40 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie view</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-
-</head>
-<body>
-    <h1>Movie view page</h1>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ movie.title }} - Movie view</title>
+    <title>{{ movie.title }} - Movie View</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'movieview.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <div class="movie-detail-container">
-        <div class="banner-section">
-            <img src="{{ movie.banner.url }}" alt="{{ movie.title }}">
+    <div class="movie-page">
+        <div class="banner-container">
+            <img src="{{ movie.banner.url }}" alt="{{ movie.title }}" class="banner-image">
+            <div class="banner-title">
+                <h1>{{ movie.title }}</h1>
+            </div>
         </div>
-        
-        <div class="content-section">
-            <div class="thumbnail-section">
-                <img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}">
+
+        <div class="movie-main">
+            <div class="poster-box">
+                <img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}" class="poster-image">
             </div>
             
-            <div class="info-section">
-                <h1>{{ movie.title }}</h1>
-                
-                <div class="description-section">
+            <div class="details-box">
+                <div class="desc-box">
                     <h3>Description</h3>
                     <p>{{ movie.description }}</p>
                 </div>
                 
-                <div class="video-section">
-                    <h3>Watch Now</h3>
+                <div class="video-box">
+                    <h3>Watch Video</h3>
                     <video controls>
                         <source src="{{ movie.video_file.url }}" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
                 </div>
                 
-                <a href="{% url 'movielist' %}" class="back-btn">Back to Movies</a>
+                <a href="{% url 'movielist' %}" class="back-link">← Back to Movies</a>
             </div>
         </div>
     </div>
